@@ -1,0 +1,123 @@
+/* --- START OF FULL FILE frontend/src/pages/PaymentStatusPage.module.css --- */
+:root {
+    --primary: #1a73e8; --primary-dark: #0d47a1; --primary-light: #e8f0fe;
+    --secondary: #34a853; --dark: #202124; --light: #ffffff;
+    --gray: #5f6368; --gray-light: #e8eaed; --gray-lighter: #f1f3f5;
+    --success: #28a745; --success-light: #d4edda;
+    --danger: #dc3545; --danger-light: #f8d7da;
+    --warning: #ffc107; --warning-light: #fff3cd;
+    --border-radius: 8px; --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .pageContainer {
+    max-width: 700px;
+    margin: 2rem auto; /* Уменьшил верхний отступ */
+    padding: 0 1rem;
+  }
+  
+  .card {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    padding: 2rem 2.5rem; /* Увеличил горизонтальный padding */
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    border-top: 5px solid var(--primary); /* Полоска сверху */
+  }
+  @media (max-width: 576px) {
+    .card { padding: 1.5rem; }
+  }
+  
+  .statusIcon {
+    width: 60px; height: 60px; /* Уменьшил */
+    color: white; display: inline-flex; justify-content: center; align-items: center;
+    border-radius: 50%; margin: 0 auto 1rem auto; font-size: 2rem;
+  }
+  .iconSuccess { background-color: var(--success); box-shadow: 0 3px 8px rgba(40, 167, 69, 0.25); }
+  .iconError { background-color: var(--danger); box-shadow: 0 3px 8px rgba(220, 53, 69, 0.25); }
+  .iconPending { background-color: var(--warning); color: var(--dark); box-shadow: 0 3px 8px rgba(255,193,7,0.25); }
+  .statusIcon i { line-height: 1; }
+  
+  .mainTitle {
+    font-size: 1.75rem; /* Уменьшил */
+    font-weight: 600; /* Сделал чуть менее жирным */
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+  }
+  
+  .message {
+    font-size: 1rem;
+    color: var(--gray);
+    margin: 0 auto 1.5rem auto;
+    max-width: 450px;
+    line-height: 1.6;
+  }
+  
+  .summarySection {
+    background-color: var(--gray-lightest);
+    border: 1px solid var(--gray-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  .summaryTitle {
+    font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--gray-light); color: var(--dark);
+  }
+  .summaryGrid p { margin-bottom: 0.6rem; font-size: 0.9rem; }
+  .summaryGrid p:last-child { margin-bottom: 0; }
+  .summaryGrid strong { color: var(--dark); margin-right: 5px; }
+  .totalPrice { font-size: 1.1rem !important; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--gray-light); }
+  .totalPrice strong { font-size: 1.1rem !important; }
+  
+  .pendingActions, .failedActions, .successActions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .termsCheckbox {
+    display: flex; align-items: flex-start; gap: 0.5rem;
+    font-size: 0.875rem; color: var(--gray); margin-bottom: 1rem;
+    text-align: left; max-width: 400px; margin-left: auto; margin-right: auto;
+  }
+  .termsCheckbox input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; accent-color: var(--primary); }
+  .termsLink { color: var(--primary); text-decoration: underline; }
+  .termsLink:hover { color: var(--primary-dark); }
+  
+  .button {
+    padding: 0.75rem 1.5rem; border-radius: var(--border-radius); border: none;
+    font-weight: 500; cursor: pointer; display: inline-flex; align-items: center;
+    gap: 0.75rem; text-decoration: none; min-width: 220px; justify-content: center;
+    transition: all 0.2s ease; font-size: 0.95rem;
+  }
+  .button i { font-size: 1em; }
+  
+  .buttonPay { composes: button; background-color: var(--primary); color: white; }
+  .buttonPay:disabled { background-color: #adb5bd; cursor: not-allowed; opacity: 0.7; }
+  .buttonPay:not(:disabled):hover { background-color: var(--primary-dark); }
+  
+  .buttonPrimary { composes: button; background-color: var(--secondary); color: white; }
+  .buttonPrimary:hover { background-color: #1f7a39; } /* Темнее зеленый */
+  
+  .buttonOutline { composes: button; background-color: transparent; color: var(--gray); border: 1px solid var(--gray-light); }
+  .buttonOutline:hover { background-color: var(--gray-lighter); border-color: #ccc; color: var(--dark); }
+  
+  .buttonRetry { composes: button; background-color: var(--warning); color: var(--dark); }
+  .buttonRetry:hover { background-color: #e0a800; }
+  
+  
+  .qrSection { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light); }
+  .qrSection h4 { font-size: 1rem; margin-bottom: 1rem; color: var(--dark); font-weight: 600; }
+  .qrHint { font-size: 0.85rem; color: var(--gray); margin-top: 1rem; max-width: 300px; margin-left: auto; margin-right: auto; }
+  
+  .cardError, .cardLoading { /* Для случаев, когда вся страница - это ошибка/загрузка */
+    composes: card;
+    border-top-color: var(--danger);
+    text-align: center;
+  }
+  .cardLoading { border-top-color: var(--primary); }
+  .cardError h2 { color: var(--danger); }
+  /* --- END OF FULL FILE frontend/src/pages/PaymentStatusPage.module.css --- */

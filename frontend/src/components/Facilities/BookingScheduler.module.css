@@ -1,0 +1,181 @@
+/* --- START OF FULL FILE frontend/src/components/Facilities/BookingScheduler.module.css --- */
+:root { /* Переменные */
+  --scheduler-primary-color: #1a73e8;
+  --scheduler-primary-light: #e8f0fe;
+  --scheduler-text-color: #202124;
+  --scheduler-text-light: #5f6368;
+  --scheduler-border-color: #e8eaed;
+  --scheduler-disabled-color: #adb5bd;
+  --scheduler-disabled-bg: #f8f9fa;
+  --scheduler-bg-color: #fff;
+  --scheduler-border-radius: 8px;
+  --scheduler-arrow-size: 32px;
+  --scheduler-arrow-side-padding: 8px;
+  --scheduler-arrow-bg: rgba(255, 255, 255, 0.9);
+  --scheduler-arrow-color: var(--scheduler-primary-color);
+  --scheduler-arrow-hover-bg: var(--scheduler-bg-color);
+  --scheduler-arrow-hover-color: #0b5ed7;
+  --scheduler-arrow-disabled-opacity: 0.3;
+  --scheduler-success-color: #28a745; 
+  --scheduler-warning-color: #fbbc04; 
+}
+
+.schedulerContainer {
+margin-bottom: 1.5rem;
+}
+
+.label {
+font-weight: 500;
+margin-bottom: 0.75rem;
+display: block;
+font-size: 0.9rem;
+color: var(--scheduler-text-color);
+}
+
+.swiperWrapper {
+position: relative;
+margin: 0;
+padding: 2px 0;
+overflow: hidden;
+}
+
+.dateSwiperContainer {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.swiperSlideDate {
+  width: auto !important;
+  height: auto !important;
+  flex-shrink: 0;
+  display: flex;
+  align-items: stretch;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.swiperSlideDate:first-child { padding-left: 0; }
+.swiperSlideDate:last-child { padding-right: 0; }
+
+
+.dateItem {
+display: flex; flex-direction: column; align-items: center; justify-content: center;
+padding: 0.6rem 0.4rem;
+border-radius: var(--scheduler-border-radius); border: 1px solid var(--scheduler-border-color);
+background-color: var(--scheduler-bg-color); color: var(--scheduler-text-color);
+transition: all 0.2s ease; user-select: none;
+height: 100%;
+min-width: 55px;
+cursor: pointer; box-sizing: border-box;
+}
+.dateItemPast { cursor: not-allowed; color: var(--scheduler-disabled-color); opacity: 0.6; }
+.dateItemSelected { border: 2px solid var(--scheduler-primary-color); background-color: var(--scheduler-primary-light); color: var(--scheduler-primary-color); font-weight: 600; padding: calc(0.6rem - 1px) calc(0.4rem - 1px); }
+.dateItem:not(.dateItemPast):not(.dateItemSelected):hover { border-color: var(--scheduler-primary-color); background-color: var(--scheduler-primary-light); }
+.dateDay { font-weight: 600; font-size: 0.65rem; text-transform: capitalize; margin-bottom: 2px; }
+.dateDate { font-size: 1rem; font-weight: 700; line-height: 1.1; }
+.dateMonth { font-size: 0.65rem; margin-top: 2px; }
+
+
+.swiperButtonDate {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+  cursor: pointer; background-color: var(--scheduler-arrow-bg); color: var(--scheduler-arrow-color);
+  width: var(--scheduler-arrow-size); height: var(--scheduler-arrow-size); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  transition: all 0.2s ease; border: 1px solid var(--scheduler-border-color);
+}
+.swiperButtonDate:hover { background-color: var(--scheduler-arrow-hover-bg); color: var(--scheduler-arrow-hover-color); border-color: #ccc; }
+.swiperButtonPrevDate { left: var(--scheduler-arrow-side-padding); }
+.swiperButtonNextDate { right: var(--scheduler-arrow-side-padding); }
+.swiperButtonDate i { font-size: 0.8rem; }
+.swiperButtonDisabled { opacity: var(--scheduler-arrow-disabled-opacity); cursor: not-allowed; pointer-events: none; }
+
+.timeSlotsSection { margin-top: 1.5rem; min-height: 100px; position: relative; }
+
+.slotsFetchingIndicator {
+    position: absolute;
+    top: -25px;
+    right: 0;
+    font-size: 0.8rem;
+    color: var(--scheduler-text-light);
+    background-color: rgba(248, 249, 250, 0.8);
+    padding: 3px 8px;
+    border-radius: 4px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.slotsGrid {
+display: grid;
+gap: 0.5rem;
+grid-template-columns: repeat(3, 1fr);
+}
+@media (min-width: 576px) { .slotsGrid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 768px) { .slotsGrid { grid-template-columns: repeat(5, 1fr); gap: 0.6rem; } }
+@media (min-width: 992px) { .slotsGrid { grid-template-columns: repeat(6, 1fr); gap: 0.75rem;} }
+@media (min-width: 1200px) { .slotsGrid { grid-template-columns: repeat(7, 1fr); } }
+
+
+.slotItem {
+  display: flex; flex-direction: column; 
+  justify-content: center; align-items: center;
+  padding: 0.5rem 0.25rem; 
+  border-radius: var(--scheduler-border-radius); border: 1px solid var(--scheduler-border-color);
+  background-color: var(--scheduler-bg-color); color: var(--scheduler-text-color);
+  transition: all 0.2s ease; font-size: 0.8rem;
+  user-select: none; min-height: 50px; 
+  cursor: pointer; text-align: center; line-height: 1.3;
+  box-sizing: border-box; 
+}
+.slotItem:disabled,
+.slotItemUnavailable { 
+  cursor: not-allowed; border-style: dashed; border-color: var(--scheduler-disabled-color);
+  background-color: var(--scheduler-disabled-bg); color: var(--scheduler-disabled-color);
+  opacity: 0.7;
+}
+.slotItemUnavailable .slotTimeText { text-decoration: line-through; } 
+.slotItemUnavailable .spotsAvailable { display: none; } 
+
+
+.slotItemSelected {
+  border: 2px solid var(--scheduler-primary-color) !important; /* !important для переопределения, если нужно */
+  background-color: var(--scheduler-primary-color) !important;
+  color: var(--scheduler-bg-color) !important;
+  font-weight: 600; 
+  padding: calc(0.5rem - 1px) calc(0.25rem - 1px);
+}
+.slotItemSelected .spotsAvailable { 
+    color: rgba(255, 255, 255, 0.85);
+}
+.slotItemSelected .slotTimeText {
+    font-weight: 600;
+}
+
+.slotItem:not(:disabled):not(.slotItemUnavailable):not(.slotItemSelected):hover {
+  border-color: var(--scheduler-primary-color);
+  background-color: var(--scheduler-primary-light);
+}
+
+.slotTimeText {
+    font-weight: 500;
+    font-size: 0.85rem; 
+}
+
+.spotsAvailable {
+    font-size: 0.7rem; 
+    color: var(--scheduler-success-color); 
+    margin-top: 2px;
+    font-weight: 500;
+}
+.spotsAvailableLow {
+    color: var(--scheduler-warning-color);
+}
+
+
+.loadingOrError { padding: 2rem; text-align: center; min-height: 100px; display: flex; justify-content: center; align-items: center; }
+.errorMessage { color: var(--danger, red); border: 1px solid var(--danger, red); background-color: #f8d7da; border-radius: var(--scheduler-border-radius); padding: 1rem; }
+.noSlotsMessage { color: var(--scheduler-text-light); text-align: center; padding: 1rem 0; font-style: italic; }
+.slotsOverlayLoading { position: absolute; top: 2.5rem; left: 0; right: 0; bottom: 0; background-color: rgba(255, 255, 255, 0.7); z-index: 5; display: flex; justify-content: center; padding-top: 2rem; border-radius: var(--scheduler-border-radius); }
+/* --- END OF FULL FILE --- */

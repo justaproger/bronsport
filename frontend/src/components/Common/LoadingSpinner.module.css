@@ -1,0 +1,46 @@
+/* src/components/Common/LoadingSpinner.module.css */
+
+.container {
+    text-align: center;
+    padding: 1rem; /* Уменьшил padding по умолчанию */
+    color: var(--gray, #5f6368);
+    display: flex; /* По умолчанию flex для центрирования */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Занимает доступную ширину */
+    box-sizing: border-box;
+  }
+  
+  /* Стиль для строчного спиннера */
+  .inline {
+      flex-direction: row; /* Иконка и текст в строку */
+      gap: 8px;
+      padding: 0.5rem; /* Меньше padding для inline */
+      width: auto; /* Ширина по контенту */
+      display: inline-flex; /* Для использования в тексте */
+  }
+  
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    /* border-top-color будет задаваться через inline style */
+    border-radius: 50%;
+    /* width и height будут задаваться через inline style */
+    animation: spin 1s linear infinite;
+    /* margin убран, т.к. центрирование через flex */
+  }
+  
+  .text {
+    margin-top: 0.75rem; /* Уменьшил отступ */
+    font-size: 0.9rem; /* Чуть меньше текст */
+    font-weight: 500;
+  }
+  .inline .text { /* Убираем верхний отступ у текста в inline */
+      margin-top: 0;
+  }
+  
+  /* Анимация вращения */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

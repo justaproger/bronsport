@@ -1,0 +1,336 @@
+:root { /* Переменные */
+  --primary: #1a73e8; --primary-dark: #0d47a1; --primary-light: #e8f0fe; --secondary: #34a853; --dark: #202124;
+  --light: #ffffff; --gray: #5f6368; --gray-light: #e8eaed; --gray-lighter: #f1f3f5; --gray-lightest: #f8f9fa;
+  --danger: #ea4335; --warning: #fbbc04; --success: #34a853; --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06); --transition: all 0.2s ease;
+  --summary-width-desktop: 340px;
+  --header-height: 70px;
+}
+
+.pageWrapper { background-color: var(--gray-lightest); padding-bottom: calc(3rem + 70px); min-height: calc(100vh - 70px); }
+@media (min-width: 992px) {
+  .pageWrapper { padding-bottom: 3rem; }
+}
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; overflow: visible; }
+.pageHeader { padding: 1.5rem 0; background-color: var(--primary-light); margin-bottom: 1.5rem; }
+.breadcrumbs { font-size: 0.875rem; margin-bottom: 0.5rem; color: var(--gray); }
+.breadcrumbs a { color: var(--primary); text-decoration: none; }
+.breadcrumbs a:hover { text-decoration: underline; }
+.breadcrumbs span { margin: 0 0.5rem; color: var(--gray); }
+
+.bookingContainer {
+display: grid;
+grid-template-columns: 1fr;
+gap: 1.5rem;
+align-items: flex-start;
+}
+
+@media (min-width: 992px) {
+.bookingContainer {
+  grid-template-columns: minmax(0, 1fr) var(--summary-width-desktop);
+  gap: 2rem;
+}
+.summaryWrapper { order: 0; } /* Информационная сводка остается справа */
+}
+
+.facilityColumn { display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; }
+.summaryWrapper { /* Обертка для инфо-сводки */ }
+@media (max-width: 991.98px) { 
+    .summaryWrapper { 
+        order: 2; /* Инфо-сводка идет после facilityColumn, но перед orderActionPanel (если он fixed) */
+        margin-top: 1.5rem; 
+    } 
+}
+
+
+.facilitySection { background-color: var(--light); border-radius: var(--border-radius); box-shadow: var(--box-shadow); overflow: hidden; border: 1px solid var(--gray-lighter); }
+.facilitySectionPadding { padding: 1.25rem; }
+.facilitySectionOverflowVisible { overflow: visible; }
+
+.imageSection { position: relative; aspect-ratio: 16 / 9; max-height: 450px; background-color: var(--gray-lighter); overflow: hidden; }
+@media (max-width: 767.98px) { .imageSection { aspect-ratio: 4 / 3; } }
+.mainImage { width: 100%; height: 100%; object-fit: cover; cursor: pointer; display: block; }
+.noImage { display: flex; height: 100%; align-items: center; justify-content: center; color: #ccc; font-style: italic; font-size: 1.1rem; }
+.thumbnailsContainer { position: absolute; bottom: 0.75rem; left: 0; right: 0; display: flex; justify-content: center; gap: 0.5rem; z-index: 1; padding: 0 1rem; overflow-x: auto; scrollbar-width: none; }
+.thumbnailsContainer::-webkit-scrollbar { display: none; }
+.thumbnail { width: 50px; height: 50px; border-radius: 4px; border: 2px solid rgba(255, 255, 255, 0.8); overflow: hidden; cursor: pointer; transition: border-color 0.2s ease; flex-shrink: 0; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+.thumbnail:hover { border-color: var(--primary); }
+.thumbnailActive { border-color: var(--primary); }
+.thumbnailImage { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.detailsSection { padding: 1.25rem; }
+.detailsTitle { font-size: clamp(1.4rem, 5vw, 1.7rem); font-weight: 700; margin-bottom: 0.5rem; color: var(--dark); }
+.uniLink { color: var(--primary); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; font-size: 0.9rem; }
+.uniLink i { width: 14px; text-align: center; font-size: 0.9em;}
+.uniLink:hover { text-decoration: underline; }
+.description { color: var(--gray); line-height: 1.6; margin-bottom: 1.5rem; font-size: 0.9rem; }
+.sectionHeading { font-weight: 600; margin-bottom: 1rem; font-size: 1.05rem; color: var(--dark); padding-bottom: 0.5rem; border-bottom: 1px solid var(--gray-light); }
+
+.bookingTypeInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--gray-lightest);
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--dark);
+  border: 1px solid var(--gray-light);
+}
+.bookingTypeInfo i {
+  color: var(--primary);
+  width: 18px;
+  text-align: center;
+  font-size: 1.1em;
+}
+.bookingTypeInfo strong {
+  font-weight: 600;
+}
+.capacityInfo {
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-left: 0.5rem;
+}
+
+.amenitiesGrid, .infoGrid { display: grid; gap: 0.75rem 1rem; margin-bottom: 1.5rem; }
+.amenitiesGrid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.infoGrid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); padding-top: 1rem; border-top: 1px solid var(--gray-light); }
+.amenityItem { display: flex; align-items: center; gap: 0.5rem; color: var(--gray); font-size: 0.85rem; }
+.amenityIcon { color: var(--success); width: 16px; text-align: center; flex-shrink: 0; font-size: 1em; }
+.infoItem { display: flex; flex-direction: column; gap: 0.25rem; }
+.infoLabel { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+.infoValue { font-weight: 500; color: var(--dark); display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; }
+.infoValueIcon { color: var(--primary); width: 14px; text-align: center; flex-shrink: 0; font-size: 0.9em; }
+
+.subscriptionButtonContainerMoved {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray-lighter);
+  text-align: center;
+}
+.subscriptionButton {
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--border-radius);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  background-color: var(--warning);
+  color: var(--dark);
+  width: auto;
+  font-size: 0.9rem;
+}
+.subscriptionButton i {
+  font-size: 0.9em;
+}
+.subscriptionButton:hover {
+  background-color: #f8b000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+@media (max-width: 767.98px) {
+  .subscriptionButtonContainerMoved {
+    margin-top: 1rem;
+  }
+  .subscriptionButton {
+     width: 100%;
+     justify-content: center;
+  }
+}
+
+/* Информационная сводка (бывший .bookingSummary, но без кнопки и цены) */
+.orderInfoSummary {
+  background-color: var(--light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1.5rem;
+  border: 1px solid var(--gray-light);
+}
+
+.summaryPlaceholder {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--gray);
+  border: 1px dashed var(--gray-light);
+  border-radius: var(--border-radius);
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.summaryPlaceholder i {
+  font-size: 2rem;
+  color: var(--gray-light);
+  margin-bottom: 1rem;
+}
+.summaryPlaceholder p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.summaryTitle { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--gray-light); color: var(--dark); }
+.summaryDetails { margin-bottom: 0; }
+.summaryItem { display: flex; justify-content: space-between; align-items: flex-start; min-height: 34px; margin-bottom: 0.6rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--gray-lighter); font-size: 0.875rem; }
+.summaryItem:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.summaryLabel { color: var(--gray); margin-right: 1rem; flex-shrink: 0; }
+.summaryValue { font-weight: 500; text-align: right; word-break: break-word; color: var(--dark); }
+
+
+/* --- ИЗМЕНЕНИЕ START (Вариант 2 - стили для CTA панели) --- */
+.orderActionPanel {
+  /* Мобильные: прилипает к низу */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--light);
+  padding: 1rem;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  z-index: 900;
+  border-top: 1px solid var(--gray-light);
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(100%); /* Скрыт по умолчанию */
+}
+
+.orderActionPanel.orderActionPanelInFlow { /* Новый класс для позиционирования в потоке на десктопе */
+    position: static; /* Возвращаем в поток */
+    bottom: auto; left: auto; right: auto;
+    background-color: var(--light); /* Может понадобиться фон, если он не наследуется */
+    padding: 1.5rem; /* Отступы как у других секций */
+    box-shadow: var(--box-shadow); /* Тень как у других секций */
+    z-index: auto;
+    border-top: none; /* Убираем верхнюю границу, если она была для fixed */
+    transform: none;
+    margin-top: 1.5rem; /* Отступ от предыдущего блока (выбор даты/абонемент) */
+    border-radius: var(--border-radius); /* Скругление как у других секций */
+    border: 1px solid var(--gray-lighter);
+}
+
+.orderActionPanelVisible { /* Класс для показа панели */
+  transform: translateY(0%);
+}
+
+/* На десктопе orderActionPanelInFlow будет основным, а orderActionPanel (fixed) не будет применяться */
+@media (min-width: 992px) {
+  .orderActionPanel { /* Сбрасываем fixed стили для десктопа, если они не нужны */
+    position: static;
+    transform: none;
+    box-shadow: none; /* Убираем тень, если он теперь в потоке и имеет свой box-shadow через .orderActionPanelInFlow */
+    padding: 0; /* Убираем padding, если он будет внутри .orderActionPanelInFlow */
+    border-top: none;
+    /* Если orderActionPanelInFlow не используется, а панель всегда fixed, то здесь ничего не меняем */
+  }
+  /* Если orderActionPanelInFlow используется, то его стили уже применены */
+}
+
+
+.orderActionPanelContent {
+  /* На мобильных (когда fixed) контент центрируется и имеет макс. ширину */
+  max-width: var(--summary-width-desktop); 
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Для десктопа, когда панель в потоке (.orderActionPanelInFlow) */
+.orderActionPanelInFlow .orderActionPanelContent {
+    max-width: none; /* Убираем ограничение ширины */
+    margin: 0;
+}
+
+
+.totalPriceLarge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark);
+}
+.totalPriceLarge span:last-child {
+  color: var(--success);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.paymentButtonLarge {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  background-color: var(--primary);
+  color: white;
+}
+.paymentButtonLarge:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #adb5bd;
+}
+.paymentButtonLarge:not(:disabled):hover {
+  background-color: var(--primary-dark);
+}
+
+.loginPromptPanel {
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+.loginPromptPanel a { color: var(--primary); font-weight: 500; }
+.loginPromptPanel a:hover { text-decoration: underline; }
+/* --- ИЗМЕНЕНИЕ END (Вариант 2 - стили для CTA панели) --- */
+
+
+.entryFeeDescription {
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.datePickerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 250px;
+  margin-top: 1rem;
+}
+.datePickerLabel {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--dark);
+}
+.datePickerInput {
+  padding: 0.75rem;
+  border: 1px solid var(--gray-light);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: var(--light);
+  cursor: pointer;
+}
+.datePickerInput:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+}
+
+.errorMessage {
+  padding: 1rem; border-radius: var(--border-radius); margin: 1rem 0; text-align: center;
+  color: var(--danger); background-color: #f8d7da; border: 1px solid #f5c6cb;
+}

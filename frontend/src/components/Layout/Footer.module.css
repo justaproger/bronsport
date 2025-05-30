@@ -1,0 +1,134 @@
+/* --- START OF FILE frontend/src/components/Layout/Footer.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-medium: rgba(255, 255, 255, 0.75);
+  --gray-dark: rgba(255, 255, 255, 0.6);
+  --footer-bg: var(--dark);
+  --link-hover: var(--light);
+  --border-color: rgba(255, 255, 255, 0.15);
+  --danger: #ea4335;
+  --border-radius: 8px;
+  --transition: all 0.2s ease;
+}
+
+.footer {
+  background-color: var(--footer-bg);
+  color: var(--gray-medium);
+  padding-top: clamp(2rem, 6vw, 4rem);
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem; /* Уменьшаем padding по умолчанию */
+}
+@media (min-width: 576px) { /* sm */
+  .container { padding: 0 1.5rem; } /* Увеличиваем на sm+ */
+}
+
+
+.grid {
+  display: grid;
+  gap: 2rem; /* Базовый отступ */
+  margin-bottom: clamp(2.5rem, 7vw, 4rem);
+  /* Mobile (xs) - 1 колонка по умолчанию (grid сделает это сам) */
+  grid-template-columns: 1fr;
+}
+
+/* Small (sm) >= 576px: 2 колонки */
+@media (min-width: 576px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+}
+
+/* Large (lg) >= 992px: 4 колонки */
+@media (min-width: 992px) {
+  .grid { grid-template-columns: repeat(4, 1fr); gap: 2rem 1.5rem; } /* Разные gap для lg */
+}
+@media (min-width: 1200px) { /* xl */
+  .grid { gap: 3rem; } /* Увеличиваем gap на больших экранах */
+}
+
+/* Стили колонок */
+.col {
+  /* Можно центрировать на xs, если нужно */
+  /* text-align: center; */
+}
+@media (min-width: 576px) {
+  .col { text-align: left; } /* Выравниваем по левому краю на sm+ */
+}
+
+.col:first-child .description { max-width: 300px; }
+/* Центрирование на xs, если .col центрирован */
+/* @media (max-width: 575.98px) { .col:first-child .description { margin-left: auto; margin-right: auto; } } */
+
+
+/* ... (стили .logo, .description, .socialLinks - без изменений) ... */
+.logo { display: inline-flex; align-items: center; gap: 0.75rem; font-size: 1.6rem; font-weight: bold; color: var(--light); text-decoration: none; margin-bottom: 1rem; }
+.logo i { font-size: 1.2em; color: var(--primary); }
+.description { font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; color: var(--gray-medium); }
+.socialLinks { display: flex; gap: 1rem; /* Центрирование: @media (max-width: 575.98px) { justify-content: center; } */ }
+.socialLinks a { color: var(--gray-medium); font-size: 1.2rem; transition: color 0.2s ease, transform 0.2s ease; }
+.socialLinks a:hover { color: var(--link-hover); transform: scale(1.1); }
+
+.colTitle {
+  font-size: 1.05rem; font-weight: 600; color: var(--light); margin-bottom: 1.25rem;
+  text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-bottom: 0.5rem;
+  /* Центрирование заголовка на xs, если .col центрирован */
+  /* @media (max-width: 575.98px) { text-align: center; } */
+}
+.colTitle::after {
+  content: ''; position: absolute; bottom: 0; left: 0; /* По умолчанию слева */
+  width: 40px; height: 2px; background-color: var(--primary);
+  /* Центрирование подчеркивания на xs */
+  /* @media (max-width: 575.98px) { left: 50%; transform: translateX(-50%); } */
+}
+/* Если текст не центрирован на xs, убираем центрирование подчеркивания */
+@media (min-width: 576px) {
+  .colTitle::after { left: 0; transform: none; }
+}
+
+
+.linkList, .contactList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.8rem; }
+.linkList a, .contactList a { color: var(--gray-medium); text-decoration: none; font-size: 0.9rem; transition: color 0.2s ease, padding-left 0.2s ease; display: inline-block; }
+.linkList a:hover, .contactList a:hover { color: var(--link-hover); padding-left: 5px; }
+.contactList li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; line-height: 1.4; color: var(--gray-medium); }
+.contactList i { width: 16px; text-align: center; color: var(--primary); flex-shrink: 0; }
+
+/* Нижняя панель */
+.bottomBar {
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 0;
+  margin-top: clamp(2.5rem, 7vw, 4rem);
+  font-size: 0.85rem;
+  color: var(--gray-dark);
+}
+.bottomBarContent {
+  /* Используем flex для управления элементами внутри .container */
+  display: flex;
+  flex-direction: column; /* Mobile: стек */
+  align-items: center; /* Центрирование на мобильных */
+  justify-content: space-between;
+  gap: 0.5rem;
+  text-align: center; /* Центрирование текста */
+}
+@media (min-width: 768px) { /* Планшеты и десктопы: в строку */
+  .bottomBarContent {
+      flex-direction: row;
+      text-align: left; /* Выравнивание по левому краю */
+  }
+}
+
+.teamCredit { display: block; /* Остается блоком */ }
+@media (min-width: 768px) {
+  .teamCredit { text-align: right; } /* Выравнивание по правому краю */
+}
+
+.heart { color: var(--danger); display: inline-block; animation: gentleHeartbeat 2.5s infinite ease-in-out; }
+@keyframes gentleHeartbeat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.2); } 30% { transform: scale(1); } 45% { transform: scale(1.2); } 60% { transform: scale(1); } }
+/* --- END OF FILE --- */

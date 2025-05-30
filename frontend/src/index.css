@@ -1,0 +1,69 @@
+/* --- START OF FILE frontend/src/index.css --- */
+/* src/index.css */
+/* Используем CSS переменные из ваших HTML файлов */
+:root {
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --primary-light: #e8f0fe;
+  --secondary: #34a853;
+  --secondary-dark: #0d652d;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --gray-lightest: #f8f9fa;
+  --danger: #ea4335;
+  --warning: #fbbc04;
+  --success: #34a853;
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --box-shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  --transition: all 0.2s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f8f9fa; /* Нейтральный фон */
+  color: var(--dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex; /* Для прижатия футера */
+  flex-direction: column; /* Для прижатия футера */
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  flex: 1; /* Занимает доступное пространство */
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+button {
+  font-family: inherit; /* Наследование шрифта для кнопок */
+}
+
+input, select, textarea {
+  font-family: inherit;
+   font-size: 1rem; /* Базовый размер шрифта для инпутов */
+}
+
+/* Добавьте здесь другие глобальные стили */
+/* --- END OF FILE --- */

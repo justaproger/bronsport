@@ -1,0 +1,86 @@
+/* --- START OF FILE frontend/src/components/Auth/AuthStyles.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --danger: #dc3545;
+  --success: #28a745; /* Зеленый для успеха */
+  --success-light: #d4edda;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.container {
+max-width: 420px;
+margin: clamp(2rem, 8vh, 5rem) auto; /* Адаптивный вертикальный отступ */
+padding: 2rem 1.5rem; /* Уменьшаем горизонтальный padding на мобильных */
+border: 1px solid var(--gray-light);
+border-radius: var(--border-radius);
+background-color: var(--light);
+box-shadow: var(--box-shadow);
+width: calc(100% - 2rem); /* Чтобы на мобильных не прилипал к краям */
+box-sizing: border-box;
+}
+/* На больших экранах возвращаем padding */
+@media (min-width: 480px) {
+  .container {
+      padding: 2.5rem;
+      width: auto; /* Убираем фикс. ширину */
+  }
+}
+
+/* Заголовки и текст */
+.title {
+text-align: center; margin-bottom: 0.5rem; font-size: 1.6rem; font-weight: 600; color: var(--dark);
+}
+.subtitle {
+color: var(--gray); margin-bottom: 2rem; text-align: center; font-size: 0.95rem; line-height: 1.5;
+}
+
+/* Сообщения об ошибках/успехе */
+.errorMessage, .successMessage {
+margin-bottom: 1rem; font-size: 0.875rem; padding: 0.75rem 1rem;
+border: 1px solid; border-radius: var(--border-radius); text-align: center;
+}
+.errorMessage { color: var(--danger); border-color: var(--danger); background-color: #f8d7da; }
+.successMessage { color: var(--success); border-color: var(--success); background-color: var(--success-light); }
+.fieldError { color: var(--danger); font-size: 0.8rem; margin-top: 4px; display: block; }
+
+/* Элементы формы */
+.formGroup { margin-bottom: 1.25rem; }
+.formGroup:last-of-type { margin-bottom: 1.5rem; }
+.label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--dark); font-size: 0.9rem; }
+.input {
+width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--gray-light);
+border-radius: var(--border-radius); font-size: 1rem; box-sizing: border-box;
+transition: border-color 0.2s ease, box-shadow 0.2s ease; min-height: 44px;
+}
+.input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15); }
+.inputError { border-color: var(--danger); }
+.inputError:focus { box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2); }
+
+/* Кнопка отправки */
+.button {
+width: 100%; padding: 0.85rem; background-color: var(--primary); color: white;
+border: none; border-radius: var(--border-radius); cursor: pointer; font-size: 1rem;
+font-weight: 500; transition: background-color 0.2s ease, opacity 0.2s ease; min-height: 46px;
+}
+.button:disabled { opacity: 0.7; cursor: not-allowed; background-color: #adb5bd; }
+.button:not(:disabled):hover { background-color: var(--primary-dark); }
+
+/* Ссылки под формой */
+.linksContainer { margin-top: 1.5rem; text-align: center; font-size: 0.875rem; color: var(--gray); line-height: 1.5; }
+.link { color: var(--primary); text-decoration: none; font-weight: 500; }
+.link:hover { text-decoration: underline; }
+
+/* Ссылка "Забыли пароль?" */
+.forgotPasswordLinkContainer { margin-bottom: 1rem; text-align: right; }
+.forgotPasswordLink { composes: link; font-size: 0.875rem; }
+
+/* Текст-подсказка под полем */
+.helperText { font-size: 0.8rem; color: var(--gray); margin-top: 4px; }
+/* --- END OF FILE --- */

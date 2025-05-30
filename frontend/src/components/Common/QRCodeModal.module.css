@@ -1,0 +1,93 @@
+/* src/components/Common/QRCodeModal.module.css */
+/* --- START OF FULL FILE frontend/src/components/Common/QRCodeModal.module.css --- */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050; /* Выше чем хедер */
+    padding: 1rem;
+    overflow-y: auto; /* Для маленьких экранов, если модалка не влезает */
+}
+
+.modal {
+    background-color: #fff;
+    padding: 1.5rem; /* Уменьшил */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 400px; /* Макс. ширина */
+    width: 100%;
+    position: relative;
+    animation: fadeInScale 0.3s ease-out;
+}
+@media (max-width: 480px) {
+    .modal {
+        padding: 1.25rem; /* Еще меньше на совсем маленьких */
+    }
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e8eaed;
+}
+
+.title {
+    font-size: 1.2rem; /* Уменьшил */
+    font-weight: 600;
+    margin: 0;
+    color: #202124;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem; /* Крупнее крестик */
+    color: #5f6368;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+}
+.closeButton:hover {
+    color: #202124;
+}
+
+.content {
+    text-align: center;
+    padding: 1rem 0 0.5rem 0; /* Уменьшил padding */
+}
+.content p {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #5f6368;
+    line-height: 1.5;
+}
+
+.hint {
+    font-size: 0.85rem !important; /* Уменьшил */
+    color: #5f6368 !important;
+    margin-top: 1.25rem !important; /* Увеличил отступ */
+    line-height: 1.4 !important;
+}
+
+/* Анимация появления */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+/* --- END OF FULL FILE --- */

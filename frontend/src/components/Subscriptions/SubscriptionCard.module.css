@@ -1,0 +1,130 @@
+/* --- START OF FILE frontend/src/components/Subscriptions/SubscriptionCard.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-light: #e8f0fe;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --gray-lightest: #f8f9fa;
+  --success: #34a853;
+  --secondary-dark: #0d652d; /* Для hover у payLink */
+  --warning: #fbbc04;
+  --danger: #ea4335;
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  --transition: all 0.2s ease;
+}
+
+.card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray-light);
+  background-color: var(--light);
+  margin-bottom: 1rem; /* Отступ между карточками */
+  align-items: center;
+  flex-wrap: wrap; /* Разрешаем перенос */
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+ .card:hover {
+     box-shadow: 0 3px 8px rgba(0,0,0,0.08); /* Небольшой эффект при наведении */
+     border-color: var(--gray-lighter);
+ }
+
+.thumbnail {
+  width: 90px; height: 90px; /* Уменьшил */
+  border-radius: var(--border-radius); object-fit: cover; flex-shrink: 0;
+  background-color: var(--gray-lighter);
+}
+
+.info {
+  flex: 1 1 300px; /* Растет/сжимается, базовая ширина */
+  display: flex; flex-direction: column; gap: 0.5rem;
+  min-width: 250px; /* Мин. ширина до переноса */
+}
+
+/* Стили для статуса */
+.statusBadge {
+  padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
+  height: fit-content; align-self: flex-start; margin-bottom: 0.5rem;
+  border: 1px solid transparent; white-space: nowrap;
+}
+/* Классы статусов */
+.statusActive { background-color: rgba(52, 168, 83, 0.1); color: var(--success); border-color: #a3d9a5; }
+.statusPendingPayment { background-color: rgba(251, 188, 4, 0.1); color: var(--warning); border-color: #ffeeba; }
+.statusExpired { background-color: #e8eaed; color: var(--gray); border-color: #dee2e6; }
+.statusCancelled { background-color: rgba(234, 67, 53, 0.1); color: var(--danger); border-color: #f5c6cb; }
+.statusDefault { background-color: #e8eaed; color: var(--gray); border-color: #dee2e6; }
+
+
+.facilityName { font-weight: 600; color: var(--dark); font-size: 1.05rem; /* Уменьшил */ }
+.universityName { color: var(--gray); font-size: 0.85rem; /* Уменьшил */ }
+
+.detail {
+  display: flex; align-items: flex-start; /* Выравнивание по верху для длинных строк */
+  gap: 0.5rem; color: var(--gray); font-size: 0.85rem; /* Уменьшил */
+  line-height: 1.4; /* Для многострочных деталей */
+}
+.detailIcon { color: var(--primary); width: 14px; text-align: center; flex-shrink: 0; margin-top: 2px; /* Выравнивание иконки */}
+.detail span { word-break: break-word; /* Перенос длинных строк времени/дней */ }
+
+.price { font-weight: bold; color: var(--success); }
+
+.subscriptionCode {
+  font-family: monospace; background-color: var(--gray-lighter); padding: 0.1em 0.4em;
+  border-radius: 4px; font-size: 0.8em; color: var(--dark);
+}
+
+/* --- Действия --- */
+.actions {
+  display: flex; flex-direction: column; align-items: flex-end; /* Выравнивание по правому краю */
+  gap: 0.75rem; margin-left: auto; /* Прижимаем вправо */ flex-shrink: 0;
+}
+/* На мобильных делаем кнопки в строку */
+@media (max-width: 575.98px) {
+    .actions {
+        flex-direction: row; /* Кнопки в ряд */
+        width: 100%; /* Занимают всю ширину под деталями */
+        margin-left: 0; /* Убираем прижатие */
+        margin-top: 1rem; /* Отступ сверху */
+        justify-content: flex-end; /* Выравниваем по правому краю */
+        border-top: 1px solid var(--gray-lighter); /* Разделитель */
+        padding-top: 1rem;
+    }
+}
+
+.actionButton {
+  padding: 0.5rem 1rem; border-radius: var(--border-radius); border: 1px solid var(--gray-light);
+  font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
+  background-color: var(--light); color: var(--gray); font-size: 0.875rem; text-decoration: none;
+  white-space: nowrap; min-height: 34px; transition: var(--transition);
+}
+.actionButton:hover { background-color: var(--gray-lighter); border-color: #ccc; color: var(--dark); }
+.actionButton i { font-size: 0.9em; }
+
+/* Кнопка/ссылка К Оплате */
+.payLink {
+  composes: actionButton;
+  color: var(--success); border-color: var(--success);
+  background-color: #e6f4ea; /* Светло-зеленый фон */
+}
+.payLink:hover { background-color: #d4edda; color: var(--secondary-dark); }
+
+/* Кнопка Продлить */
+.renewButton {
+    composes: actionButton;
+    color: var(--primary); border-color: var(--primary);
+}
+.renewButton:hover { background-color: var(--primary-light); }
+
+/* Текст ошибки (если не найдена транзакция) */
+.errorText {
+    font-size: 0.8rem;
+    color: var(--danger);
+    text-align: right;
+}
+/* --- END OF FILE --- */

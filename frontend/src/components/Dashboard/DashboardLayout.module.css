@@ -1,0 +1,133 @@
+/* --- START OF FILE frontend/src/components/Dashboard/DashboardLayout.module.css --- */
+:root { /* Переменные */
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --light: #ffffff;
+  --gray-lightest: #f8f9fa;
+  --gray-light: #e8eaed;
+  --gray: #5f6368;
+  --primary: #1a73e8;
+  --sidebar-width-dashboard: 250px; /* Ширина сайдбара */
+  --mobile-sidebar-width-dashboard: 280px;
+  --header-height: 70px; /* Высота хедера */
+  --sticky-top-offset: calc(var(--header-height) + 1rem); /* Отступ для sticky = высота хедера + 1rem */
+}
+
+.layoutContainer {
+max-width: 1280px;
+margin: 2rem auto;
+padding: 0 1rem;
+display: grid;
+/* Колонки: сайдбар + контент */
+grid-template-columns: var(--sidebar-width-dashboard) 1fr;
+gap: 1.5rem;
+align-items: flex-start; /* Выравниваем по верху */
+}
+
+/* --- Стили для ДЕСКТОПНОЙ версии по умолчанию --- */
+.mobileSidebarToggle {
+  display: none; /* СКРЫТ на десктопе */
+}
+
+.sidebarWrapper {
+  position: sticky; /* Прилипание на десктопе */
+  top: var(--sticky-top-offset); /* Отступ под хедером */
+  width: var(--sidebar-width-dashboard);
+  height: calc(100vh - var(--sticky-top-offset) - 1rem); /* Ограничиваем высоту, чтобы скролл появлялся внутри сайдбара, если он длиннее */
+  max-height: calc(100vh - var(--sticky-top-offset) - 1rem); /* Добавляем max-height на всякий случай */
+  overflow-y: auto; /* Позволяем скролл внутри сайдбара */
+  z-index: 1; /* Обычный z-index для потока */
+  /* Убираем transition, т.к. на десктопе он не нужен */
+  /* transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s; */
+}
+
+/* Оверлей скрыт на десктопе */
+.mobileSidebarOverlay {
+  display: none;
+}
+
+/* Основной контент */
+.content {
+background-color: var(--light);
+border-radius: var(--border-radius);
+box-shadow: var(--box-shadow);
+padding: 1.5rem;
+min-height: 400px;
+width: 100%;
+box-sizing: border-box;
+border: 1px solid var(--gray-lighter);
+}
+
+/* --- Адаптация для мобильных и планшетов --- */
+@media (max-width: 991.98px) {
+.layoutContainer {
+  grid-template-columns: 1fr; /* Одна колонка */
+  gap: 1rem;
+  margin-top: 1rem;
+  position: relative; /* Для позиционирования кнопки */
+}
+
+.mobileSidebarToggle {
+    display: flex; /* ПОКАЗЫВАЕМ кнопку */
+    position: fixed; /* Фиксируем */
+    top: calc(var(--header-height) + 1rem); /* Под хедером */
+    left: 1rem;
+    z-index: 998; /* Ниже хедера, но выше контента */
+    background-color: var(--light);
+    border: 1px solid var(--gray-light);
+    color: var(--primary);
+    border-radius: 50%;
+    width: 40px; height: 40px;
+    font-size: 1.1rem; cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    align-items: center; justify-content: center;
+    /* Убираем sticky стили */
+    /* position: static; */
+    /* top: auto; */
+}
+
+.sidebarWrapper {
+    /* Переопределяем стили для выезжающей панели */
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: var(--mobile-sidebar-width-dashboard); /* Ширина выезжающего меню */
+    max-width: 90%;
+    height: 100%; /* На всю высоту viewport */
+    transform: translateX(-100%); /* Скрыт слева */
+    visibility: hidden;
+    z-index: 1002; /* Выше оверлея */
+    box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 0; /* Убираем скругление */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.3s; /* Добавляем visibility в transition */
+    /* Убираем sticky */
+    /* position: static; */
+    /* top: auto; */
+    /* overflow-y: auto; */ /* Скролл уже есть */
+    max-height: none; /* Снимаем ограничение высоты */
+}
+.sidebarWrapperVisible {
+    transform: translateX(0);
+    visibility: visible;
+    transition-delay: 0s; /* Убираем задержку */
+}
+
+ /* Показываем оверлей */
+ .mobileSidebarOverlay {
+     display: block;
+     position: fixed;
+     top: 0; left: 0; right: 0; bottom: 0;
+     background-color: rgba(0, 0, 0, 0.5); /* Увеличил затемнение */
+     z-index: 1001; /* Под сайдбаром, над контентом */
+     opacity: 0; visibility: hidden;
+     transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Скрываем мгновенно */
+ }
+ .sidebarWrapperVisible ~ .mobileSidebarOverlay {
+     opacity: 1; visibility: visible; transition-delay: 0s;
+ }
+
+ /* Контент на мобильных */
+ .content {
+     /* Дополнительные стили для контента на мобильных, если нужны */
+ }
+}
+/* --- END OF FILE --- */

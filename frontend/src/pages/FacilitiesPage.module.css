@@ -1,0 +1,208 @@
+/* --- START OF FILE frontend/src/pages/FacilitiesPage.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-light: #e8f0fe;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --gray-lightest: #f8f9fa;
+  --danger: #ea4335;
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --sidebar-width-desktop: 280px; /* Ширина сайдбара на десктопе */
+  --mobile-sidebar-width: 280px; /* Ширина выезжающего меню */
+  --header-height: 70px;
+  --mobile-sidebar-header-height: 4rem;
+}
+
+.pageWrapper {
+background-color: var(--gray-lightest);
+min-height: calc(100vh - 70px);
+padding-bottom: 3rem;
+}
+
+.pageHeader {
+padding: 1.5rem 0;
+background-color: var(--primary-light);
+margin-bottom: 1rem; /* Уменьшаем отступ на мобильных */
+}
+
+.container {
+max-width: 1280px;
+margin: 0 auto;
+padding: 0 1rem; /* Базовый padding */
+}
+
+.breadcrumbs { font-size: 0.875rem; margin-bottom: 0.5rem; color: var(--gray); }
+.breadcrumbs a { color: var(--primary); text-decoration: none; }
+.breadcrumbs a:hover { text-decoration: underline; }
+.breadcrumbs span { margin: 0 0.5rem; color: var(--gray); }
+
+.pageTitle {
+font-size: clamp(1.4rem, 5vw, 1.8rem); /* Уменьшаем базовый размер */
+font-weight: 700;
+color: var(--dark);
+text-align: center; /* Центрируем на мобильных */
+}
+
+/* --- Кнопка мобильных фильтров --- */
+.mobileFilterButton {
+  display: block; /* Видна по умолчанию (на xs) */
+  width: 100%; padding: 0.75rem 1rem; margin-bottom: 1rem;
+  border: 1px solid var(--gray-light); background-color: var(--light);
+  color: var(--primary); font-weight: 500; font-size: 0.95rem;
+  border-radius: var(--border-radius); cursor: pointer; text-align: center;
+  box-shadow: var(--box-shadow);
+}
+.mobileFilterButton i { margin-right: 8px; }
+
+/* --- Основной Layout --- */
+.layout {
+display: grid;
+grid-template-columns: 1fr; /* Mobile (xs): 1 колонка по умолчанию */
+gap: 1.5rem; /* Базовый отступ */
+align-items: flex-start;
+}
+
+/* --- Обертка Сайдбара --- */
+/* Стили для мобильных/выезжающей панели по умолчанию */
+.sidebarWrapper {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: var(--mobile-sidebar-width); max-width: 90%;
+  height: 100vh; max-height: 100vh;
+  transform: translateX(-100%); visibility: hidden;
+  z-index: 1002; background-color: var(--light);
+  box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.3s;
+  overflow-y: auto;
+  padding-top: var(--mobile-sidebar-header-height); /* Место для хедера */
+  -webkit-overflow-scrolling: touch;
+}
+.sidebarWrapperVisible { transform: translateX(0); visibility: visible; transition-delay: 0s; }
+
+/* Мобильный хедер сайдбара */
+.mobileSidebarHeader {
+  display: flex; /* Виден по умолчанию (т.к. сайдбар скрыт) */
+  justify-content: space-between; align-items: center; padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--gray-light); background-color: var(--gray-lightest);
+  position: absolute; top: 0; left: 0; right: 0;
+  height: var(--mobile-sidebar-header-height);
+  z-index: 1; box-sizing: border-box;
+}
+.mobileSidebarHeader span { font-weight: 600; font-size: 1.1rem; }
+.closeMobileFiltersButton { background: none; border: none; font-size: 1.3rem; color: var(--gray); cursor: pointer; padding: 0.25rem;}
+
+/* Оверлей */
+.mobileFilterOverlay {
+  display: block; /* Показываем */
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1001; opacity: 0; visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+.sidebarWrapperVisible ~ .mobileFilterOverlay { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+
+/* --- Брейкпоинт LG (>= 992px) --- */
+@media (min-width: 992px) {
+  .pageHeader { margin-bottom: 1.5rem; } /* Возвращаем отступ */
+  .container { padding: 0 1.5rem; } /* Больше padding */
+  .pageTitle { text-align: left; font-size: 2rem; } /* Выравниваем и увеличиваем */
+
+  .mobileFilterButton { display: none; } /* Скрываем кнопку */
+
+  .layout {
+      grid-template-columns: var(--sidebar-width-desktop) 1fr; /* 2 колонки */
+      gap: 2rem; /* Увеличиваем gap */
+  }
+
+  .sidebarWrapper {
+      /* Переопределяем стили для десктопа */
+      position: sticky; /* Возвращаем sticky */
+      top: var(--sticky-top-offset);
+      width: var(--sidebar-width-desktop);
+      height: calc(100vh - var(--sticky-top-offset) - 1rem);
+      max-height: calc(100vh - var(--sticky-top-offset) - 1rem);
+      transform: none; /* Убираем transform */
+      visibility: visible; /* Видим по умолчанию */
+      z-index: 1; /* Возвращаем обычный z-index */
+      box-shadow: none; /* Убираем тень от выезжающей панели */
+      border-radius: var(--border-radius); /* Возвращаем скругление */
+      transition: none; /* Убираем transition */
+      overflow-y: auto; /* Скролл внутри */
+      padding-top: 0; /* Убираем отступ */
+      border: 1px solid var(--gray-lighter); /* Добавляем рамку */
+  }
+
+  .mobileSidebarHeader { display: none; } /* Скрываем мобильный хедер */
+  .mobileFilterOverlay { display: none; } /* Скрываем оверлей */
+}
+
+/* --- Стили контента и сортировки --- */
+.content { display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; }
+
+.sortingBar {
+  display: flex;
+  /* Mobile (xs): Элементы в столбик */
+  flex-direction: column;
+  align-items: stretch; /* Растягиваем */
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: var(--light); border-radius: var(--border-radius); box-shadow: var(--box-shadow);
+}
+.controls { display: flex; align-items: center; gap: 1rem; justify-content: space-between; /* Чтобы растянуть селект и кнопки */ }
+.resultsCount { font-weight: 500; color: var(--gray); font-size: 0.9rem; text-align: center; /* Центрируем на мобильных */ }
+.sortSelect { padding: 0.6rem 1rem; border-radius: var(--border-radius); border: 1px solid var(--gray-light); background-color: var(--light); font-size: 0.9rem; cursor: pointer; height: 40px; box-sizing: border-box; flex-grow: 1; min-width: 150px;} /* Растягиваем селект */
+.sortSelect:focus { border-color: var(--primary); outline: none; }
+.viewToggle { display: flex; gap: 0.5rem; flex-shrink: 0;}
+.viewButton { width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: var(--border-radius); border: 1px solid var(--gray-light); background: var(--light); color: var(--gray); cursor: pointer; transition: all 0.2s ease; font-size: 1rem; }
+.viewButton:hover { background-color: var(--gray-lighter); border-color: #ccc; }
+.viewButtonActive { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+
+/* Medium (md) >= 768px: Возвращаем сортировку в строку */
+@media (min-width: 768px) {
+  .sortingBar { flex-direction: row; align-items: center; justify-content: space-between; padding: 0.75rem 1.5rem; }
+  .resultsCount { text-align: left; margin-right: auto; }
+  .controls { justify-content: flex-end; flex-grow: 0; } /* Убираем растягивание */
+  .sortSelect { flex-grow: 0; min-width: 180px; } /* Возвращаем нормальную ширину */
+}
+
+
+/* --- Стили Сетки Объектов --- */
+.grid {
+display: grid;
+gap: 1rem; /* Базовый отступ */
+grid-template-columns: 1fr; /* Mobile (xs): 1 колонка */
+}
+/* Small (sm) >= 576px: 2 колонки */
+@media (min-width: 576px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+}
+/* Large (lg) >= 992px: 3 колонки */
+@media (min-width: 992px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+/* Extra Large (xl) >= 1200px: Возможно, 3 или 4 колонки, в зависимости от FacilityCard */
+@media (min-width: 1200px) {
+   /* Оставляем 3 колонки, если карточки достаточно широкие */
+   /* .grid { grid-template-columns: repeat(4, 1fr); } */
+}
+
+
+/* --- Стили Списка Объектов --- */
+.list { display: flex; flex-direction: column; gap: 1rem; }
+
+/* --- Сообщения и Заглушки --- */
+.loadingContainer, .errorContainer, .noResultsContainer { text-align: center; padding: 3rem 1rem; margin: 1rem 0; background-color: var(--light); border-radius: var(--border-radius); box-shadow: var(--box-shadow); color: var(--gray); }
+.errorContainer { color: var(--danger); border: 1px solid var(--danger); background-color: #f8d7da; }
+.noResultsContainer { font-style: italic; }
+
+/* --- Пагинация --- */
+.paginationContainer { margin-top: 1.5rem; display: flex; justify-content: center; padding-bottom: 1rem; }
+
+/* --- Сообщение об ошибке --- */
+.errorMessage { color: var(--danger); background-color: #f8d7da; border-color: #f5c6cb; padding: 1rem; border-radius: var(--border-radius); border: 1px solid; }
+/* --- END OF FILE --- */

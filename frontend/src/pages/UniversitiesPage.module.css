@@ -1,0 +1,162 @@
+/* --- START OF FILE frontend/src/pages/UniversitiesPage.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-light: #e8f0fe;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --gray-lightest: #f8f9fa;
+  --danger: #ea4335; /* Для ошибок */
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.pageWrapper {
+  background-color: var(--gray-lightest);
+  min-height: calc(100vh - 70px); /* Минус хедер */
+  padding-bottom: 3rem;
+}
+
+.pageHeader {
+  padding: 1.5rem 0; /* Уменьшил отступ */
+  background-color: var(--primary-light);
+  margin-bottom: 1.5rem; /* Уменьшил отступ */
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.breadcrumbs {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  color: var(--gray);
+}
+.breadcrumbs a { color: var(--primary); text-decoration: none; }
+.breadcrumbs a:hover { text-decoration: underline; }
+.breadcrumbs span { margin: 0 0.5rem; color: var(--gray); }
+
+.pageTitle {
+  font-size: clamp(1.5rem, 5vw, 2rem); /* Адаптивный размер */
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* --- Панель фильтрации --- */
+.filterBar {
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  background-color: var(--light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* Разрешаем перенос */
+}
+
+.filterLabel {
+  font-weight: 500;
+  color: var(--dark);
+  flex-shrink: 0; /* Не сжимать label */
+  margin-right: 0.5rem; /* Отступ справа от label */
+}
+
+.citySelect {
+  padding: 0.6rem 1rem; /* Увеличил padding */
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray-light);
+  background-color: var(--light);
+  font-size: 0.95rem; /* Увеличил шрифт */
+  min-width: 220px; /* Увеличил минимальную ширину */
+  cursor: pointer;
+  flex-grow: 1; /* Занимает доступное место */
+  max-width: 350px; /* Ограничиваем макс. ширину */
+}
+.citySelect:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2); /* Добавил тень фокуса */
+}
+
+.resultsCount {
+  margin-left: auto; /* Прижимаем вправо */
+  color: var(--gray);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  padding-left: 1rem; /* Отступ слева на больших экранах */
+}
+
+/* Адаптация фильтра */
+@media (max-width: 575.98px) {
+    .filterBar {
+        flex-direction: column; /* Элементы в столбик */
+        align-items: stretch; /* Растягиваем по ширине */
+        gap: 0.75rem; /* Уменьшаем отступ */
+    }
+    .citySelect {
+        min-width: 100%; /* На всю ширину */
+        max-width: none;
+    }
+    .resultsCount {
+        margin-left: 0; /* Убираем прижатие */
+        padding-left: 0;
+        text-align: center; /* Центрируем счетчик */
+        margin-top: 0.5rem;
+    }
+}
+
+/* --- Сетка для карточек --- */
+.grid {
+  display: grid;
+  /* По умолчанию */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* На маленьких экранах делаем карточки чуть уже */
+@media (max-width: 767.98px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem; /* Уменьшаем отступ */
+    }
+}
+@media (max-width: 370px) { /* Для самых маленьких */
+     .grid {
+         grid-template-columns: 1fr; /* Одна колонка */
+     }
+}
+
+
+/* --- Сообщения --- */
+.loadingContainer, .errorContainer, .noResultsContainer {
+    text-align: center;
+    padding: 3rem 1rem;
+    margin: 1rem 0;
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    color: var(--gray);
+}
+.errorContainer {
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    background-color: #f8d7da;
+}
+.noResultsContainer {
+    font-style: italic;
+}
+
+/* --- Пагинация --- */
+.paginationContainer {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem; /* Отступ снизу */
+}
+/* --- END OF FILE --- */

@@ -1,0 +1,93 @@
+/* --- START OF FILE frontend/src/components/Facilities/FiltersSidebar.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --border-radius: 8px;
+  --safe-area-bottom-fallback: 1.5rem;
+  --mobile-sidebar-header-height: 4rem;
+}
+
+/* Обертка контента сайдбара */
+.sidebarContent {
+padding: 1.5rem; /* Базовый padding */
+padding-top: 1rem; /* Уменьшаем верхний, т.к. нет заголовка на мобильных */
+display: flex; flex-direction: column;
+height: 100%; /* Занимает всю высоту родителя (.sidebarWrapper) */
+overflow-y: auto; /* Скролл ЗДЕСЬ */
+box-sizing: border-box;
+padding-bottom: calc(env(safe-area-inset-bottom, var(--safe-area-bottom-fallback)) + 1rem); /* Уменьшаем базовый нижний отступ */
+-webkit-overflow-scrolling: touch; /* Для iOS */
+}
+/* На десктопе возвращаем padding */
+@media (min-width: 992px) {
+  .sidebarContent { padding: 1.5rem; overflow-y: visible; height: auto; }
+}
+
+
+/* Заголовок (виден только на десктопе) */
+.title {
+font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem;
+padding-bottom: 0.75rem; border-bottom: 1px solid var(--gray-light); color: var(--dark);
+display: none; /* Скрыт по умолчанию (Mobile-First) */
+}
+@media (min-width: 992px) { .title { display: block; } } /* Показываем на десктопе */
+
+/* Группы фильтров */
+.filterGroup { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-lighter); }
+.filterGroup:last-of-type { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+.groupTitle { font-weight: 600; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: var(--dark); user-select: none; }
+.groupTitle span { flex-grow: 1; }
+.groupTitle i { color: var(--gray); transition: transform 0.2s ease; font-size: 0.8em; }
+.groupTitleCollapsed i { transform: rotate(-90deg); }
+.groupContent { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; }
+/* .groupContentHidden УБИРАЕМ - используем JS для условного рендеринга или CSS для высоты */
+.groupContentHidden { max-height: 0; overflow: hidden; margin-top: 0; padding-top: 0; padding-bottom: 0; opacity: 0; transition: max-height 0.3s ease-out, opacity 0.2s ease-out, margin-top 0.3s ease-out, padding 0.3s ease-out; }
+.noDataText { font-style: italic; color: var(--gray); font-size: 0.85rem; }
+
+/* Чекбоксы */
+.checkboxItem { display: flex; align-items: center; gap: 0.5rem; }
+.checkboxItem input[type="checkbox"] { width: 18px; height: 18px; /* Немного увеличим */ cursor: pointer; accent-color: var(--primary); margin: 0; flex-shrink: 0; }
+.checkboxLabel { font-size: 0.9rem; color: var(--dark); cursor: pointer; flex: 1; word-break: break-word; line-height: 1.4; display: flex; align-items: center; }
+.amenityIcon { margin-right: 0.5rem; width:16px; color: var(--primary); font-size: 1em; }
+
+
+/* Цена */
+.priceInputs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem; }
+@media (max-width: 360px) { .priceInputs { grid-template-columns: 1fr; } }
+.priceInputContainer { /* Контейнер для label+input */ }
+.priceLabel { font-size: 0.8rem; /* Увеличим */ color: var(--gray); margin-bottom: 0.3rem; display: block; }
+.priceInput { width: 100%; padding: 0.6rem; /* Увеличим */ border: 1px solid var(--gray-light); border-radius: var(--border-radius); font-size: 0.9rem; box-sizing: border-box; }
+.priceInput:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2); }
+.priceInput::-webkit-outer-spin-button, .priceInput::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.priceInput[type=number] { -moz-appearance: textfield; }
+
+
+/* Кнопки действий */
+.actions {
+display: flex; flex-direction: column; gap: 0.75rem;
+margin-top: auto; /* Прижимаем к низу */
+padding-top: 1.5rem; border-top: 1px solid var(--gray-light);
+/* Стили для прилипания убраны, т.к. скроллится весь .sidebarContent */
+/* position: sticky; */
+/* bottom: calc(env(safe-area-inset-bottom, var(--safe-area-bottom-fallback)) - 0.1rem); */
+/* background-color: var(--light); */
+padding-bottom: 0; /* Нижний padding теперь у .sidebarContent */
+margin-bottom: 0;
+}
+/* Возвращаем старое поведение кнопок на десктопе */
+@media (min-width: 992px) {
+  .actions { position: static; background-color: transparent; }
+}
+
+/* ... (стили кнопок .button, .buttonPrimary, .buttonOutline без изменений) ... */
+.button { padding: 0.625rem 1.25rem; border-radius: var(--border-radius); border: none; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center; transition: all 0.2s ease; text-decoration: none; font-size: 0.9rem; width: 100%; }
+.button i { font-size: 0.9em; }
+.buttonPrimary { background-color: var(--primary); color: white; composes: button; }
+.buttonPrimary:hover { background-color: var(--primary-dark); }
+.buttonOutline { background-color: transparent; color: var(--gray); border: 1px solid var(--gray-light); composes: button; }
+.buttonOutline:hover { background-color: var(--gray-lighter); border-color: var(--gray); color: var(--dark); }
+/* --- END OF FILE --- */

@@ -1,0 +1,110 @@
+/* src/components/Universities/StaffCard.module.css */
+
+/* Используем переменные */
+:root {
+    --primary: #1a73e8;
+    --dark: #202124;
+    --light: #ffffff;
+    --gray: #5f6368;
+    --gray-light: #e8eaed;
+    --gray-lighter: #f1f3f5;
+    --border-radius: 8px;
+    --box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    --transition: all 0.2s ease;
+  }
+  
+  .card {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Для выравнивания */
+    text-align: center;
+  }
+  .card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+  }
+  
+  
+  .imageContainer {
+    width: 100%;
+    height: 250px; /* Фиксированная высота */
+    background-color: var(--gray-lighter); /* Фон заглушки */
+    overflow: hidden;
+    margin-bottom: 1rem; /* Отступ от картинки до текста */
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* Фокус на верхней части */
+    display: block; /* Убрать отступ снизу */
+  }
+  
+  .details {
+    padding: 0 1.25rem 1.25rem 1.25rem; /* Уменьшил padding */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Занимает оставшееся место */
+  }
+  
+  .name {
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+    color: var(--dark);
+  }
+  
+  .position {
+    color: var(--primary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem; /* Больше отступ после должности */
+    font-weight: 500; /* Сделал чуть жирнее */
+  }
+  
+  .bio {
+    font-size: 0.875rem;
+    color: var(--gray);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Занимает доступное место */
+    text-align: left; /* Биография по левому краю */
+    /* Ограничение по высоте, если нужно */
+    /* max-height: calc(0.875rem * 1.5 * 3); */ /* Примерно 3 строки */
+    /* overflow: hidden; */
+  }
+  
+  .contactContainer {
+    margin-top: auto; /* Прижимаем контакты к низу */
+    padding-top: 1rem; /* Увеличил отступ */
+    border-top: 1px solid var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем контакты */
+    gap: 0.6rem; /* Увеличил отступ */
+  }
+  
+  .contactItem {
+    font-size: 0.875rem;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem; /* Увеличил отступ */
+    word-break: break-word; /* Перенос длинных email */
+    text-decoration: none; /* Для ссылок в контактах */
+  }
+  .contactItem:hover {
+      color: var(--dark); /* Затемнение при наведении на контакт */
+  }
+  
+  .contactIcon {
+    color: var(--primary);
+    width: 14px;
+    text-align: center;
+    flex-shrink: 0;
+  }

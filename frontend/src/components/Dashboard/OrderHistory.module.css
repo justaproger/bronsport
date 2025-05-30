@@ -1,0 +1,72 @@
+/* --- START OF FULL FILE frontend/src/components/Dashboard/OrderHistory.module.css --- */
+:root {
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --danger: #ea4335;
+  --danger-light: #f8d7da;
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0;
+  flex-grow: 1;
+}
+@media (max-width: 575.98px) {
+    .sectionHeader { justify-content: center; }
+    .title { text-align: center; }
+}
+
+.bookingList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.loadingIndicator {
+    text-align: center;
+    padding: 0.5rem;
+    color: var(--gray);
+    font-size: 0.8rem;
+    position: absolute;
+    top: -15px; left: 50%; transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 4px; z-index: 1; box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.paginationContainer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.messageContainer {
+    text-align: center; padding: 2rem; color: var(--gray); margin-top: 1rem;
+    background-color: var(--light); border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow); min-height: 150px; display: flex;
+    justify-content: center; align-items: center;
+}
+.noBookingsMessage { font-style: italic; }
+.errorMessage { color: var(--danger); border: 1px solid var(--danger); background-color: var(--danger-light); padding: 1rem; }
+/* --- END OF FULL FILE --- */

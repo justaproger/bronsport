@@ -1,0 +1,42 @@
+/* frontend/src/components/Common/TestModeBanner.module.css */
+/* --- START OF FULL FILE frontend/src/components/Common/TestModeBanner.module.css --- */
+:root {
+    --warning-bg: #fff3cd; /* Светло-желтый фон для предупреждений */
+    --warning-text: #856404; /* Темно-желтый/коричневый текст */
+    --warning-border: #ffeeba;
+    --dark: #202124;
+}
+
+.testModeBanner {
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--warning-border);
+    position: sticky; /* Чтобы был виден при скролле */
+    top: 70px; /* Под основным хедером (предполагая высоту хедера 70px) */
+    left: 0;
+    width: 100%;
+    z-index: 999; /* Ниже хедера, но выше остального контента */
+    box-sizing: border-box;
+}
+
+.bannerText {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Анимация для привлечения внимания (опционально, можно сделать просто статичной) */
+/* Если нужна бегущая строка, то это реализуется иначе */
+/* @keyframes subtlePulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.85; }
+    100% { opacity: 1; }
+} */
+
+/* .bannerText {
+    animation: subtlePulse 2.5s infinite ease-in-out;
+} */
+
+/* --- END OF FULL FILE --- */

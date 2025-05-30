@@ -1,0 +1,120 @@
+/* --- START OF FULL FILE frontend/src/components/Facilities/FacilityCard.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8; --primary-light: #e8f0fe; --dark: #202124;
+  --light: #ffffff; --gray: #5f6368; --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5; --success: #34a853; --warning: #fbbc04;
+  --danger: #ea4335; --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --box-shadow-hover: 0 4px 12px rgba(0,0,0,0.1); --transition: all 0.2s ease;
+}
+
+/* --- Стили для FacilityCard (Сетка) --- */
+
+/* Убираем cardLink, т.к. ссылка больше не оборачивает всю карточку */
+/* .cardLink { display: block; height: 100%; text-decoration: none; color: var(--dark); transition: var(--transition); } */
+/* .cardLink:hover .card { box-shadow: var(--box-shadow-hover); transform: translateY(-3px); border-color: var(--gray-light); } */
+
+.card {
+background-color: var(--light); border-radius: var(--border-radius); box-shadow: var(--box-shadow);
+overflow: hidden; transition: var(--transition); display: flex; flex-direction: column;
+height: 100%; border: 1px solid var(--gray-lighter);
+/* Добавляем hover эффект на саму карточку */
+&:hover {
+  box-shadow: var(--box-shadow-hover); transform: translateY(-3px); border-color: var(--gray-light);
+}
+}
+
+.imageContainer { height: 180px; width: 100%; position: relative; overflow: hidden; background-color: var(--gray-lighter); }
+/* --- ДОБАВЛЕНО: Обертка-ссылка для картинки --- */
+.imageLinkWrapper { display: block; height: 100%; width: 100%; }
+/* ------------------------------------------- */
+.image { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+/* Применяем hover эффект на обертку */
+.imageLinkWrapper:hover .image { transform: scale(1.03); }
+
+.bookmarkButton { position: absolute; top: 0.75rem; right: 0.75rem; width: 32px; height: 32px; background-color: rgba(255, 255, 255, 0.85); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: var(--transition); border: none; padding: 0; color: var(--primary); font-size: 1rem; line-height: 1; z-index: 2; }
+.bookmarkButton:hover { background-color: var(--light); transform: scale(1.1); }
+.bookmarkButton i.fas { color: var(--danger); }
+
+.details { padding: 1rem 1.25rem 1.25rem; flex: 1; display: flex; flex-direction: column; }
+.type { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; margin-bottom: 0.75rem; background-color: var(--primary-light); color: var(--primary); align-self: flex-start; font-weight: 500; white-space: nowrap; }
+
+/* --- ИЗМЕНЕНО: Ссылка для названия объекта --- */
+.nameLink {
+  text-decoration: none;
+  color: inherit; /* Наследуем цвет .name */
+  margin-bottom: 0.5rem; /* Отступ как у h3 */
+  display: block; /* Чтобы занимала строку */
+}
+.nameLink:hover .name { /* Эффект при наведении на ссылку */
+  color: var(--primary);
+  text-decoration: underline;
+}
+.name { font-size: 1.1rem; font-weight: 600; color: var(--dark); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; min-height: calc(1.1rem * 1.4 * 2); transition: color 0.2s ease; }
+/* ----------------------------------------- */
+
+.university { font-size: 0.875rem; color: var(--gray); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+.universityLogo { width: 20px; height: 20px; border-radius: 50%; object-fit: contain; background-color: #fff; border: 1px solid var(--gray-light); flex-shrink: 0; }
+.universityNameLink { color: inherit; text-decoration: none; transition: color 0.2s ease; display: inline-block; max-width: calc(100% - 25px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.universityNameLink:hover { color: var(--primary); text-decoration: underline; }
+
+.meta { display: flex; gap: 1rem; margin-top: auto; padding-top: 0.75rem; flex-wrap: wrap; color: var(--gray); font-size: 0.8rem; border-top: 1px solid var(--gray-lighter); }
+.metaItem { display: flex; align-items: center; gap: 0.4rem; }
+.metaIcon { color: var(--primary); width: 12px; text-align: center; font-size: 0.9em; }
+
+/* --- ИЗМЕНЕНО: Контейнер для цены и кнопки "Подробнее" --- */
+.priceAndAction {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem; /* Отступ между ценой и кнопкой */
+}
+.price { font-weight: 600; color: var(--success); font-size: 1rem; white-space: nowrap; }
+/* .price i { display: none; } /* Убираем старую стрелку */
+
+/* --- ДОБАВЛЕНО: Ссылка-кнопка "Подробнее" --- */
+.detailsLinkButton {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0; /* Не сжимать */
+  white-space: nowrap;
+}
+.detailsLinkButton:hover { background-color: #d2e3fc; }
+.detailsLinkButton i { font-size: 0.8em; }
+/* ----------------------------------------- */
+
+
+/* --- Стили для FacilityListItem (Список) --- */
+.listItem { background-color: var(--light); border-radius: var(--border-radius); box-shadow: var(--box-shadow); overflow: hidden; transition: var(--transition); display: flex; text-decoration: none; color: var(--dark); border: 1px solid var(--gray-lighter); flex-direction: row; }
+@media (max-width: 575.98px) { .listItem { flex-direction: column; } }
+.listItem:hover { box-shadow: var(--box-shadow-hover); border-color: var(--gray-light); }
+.listItemImageContainer { width: 200px; height: 160px; flex-shrink: 0; position: relative; background-color: var(--gray-lighter); }
+@media (max-width: 575.98px) { .listItemImageContainer { width: 100%; height: 180px; } }
+.listItemImageContainer .image { height: 100%; } /* Используем тот же класс .image */
+.listItemDetails { flex: 1; padding: 1rem 1.5rem; display: flex; flex-direction: column; }
+@media (max-width: 575.98px) { .listItemDetails { padding: 1rem; } }
+.listItemHeader { display: flex; justify-content: space-between; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem 1rem; }
+.listItemInfo { flex: 1; min-width: 200px; }
+/* Стиль для названия объекта как ссылки в списке */
+.listItemNameLink { text-decoration: none; color: inherit; display: block; margin-bottom: 0.5rem; }
+.listItemNameLink:hover .name { text-decoration: underline; color: var(--primary); }
+.listItemInfo .name { min-height: auto; -webkit-line-clamp: 3; margin-bottom: 0; /* Убираем отступ у h3 */}
+.listItemMeta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.5rem 1rem; margin-top: 0.75rem; color: var(--gray); font-size: 0.8rem; }
+.listItemActions { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--gray-lighter); flex-wrap: wrap; gap: 0.5rem 1rem; }
+.listItemPrice { font-weight: 600; color: var(--success); font-size: 1.1rem; white-space: nowrap; }
+.listItemButton { padding: 0.6rem 1.1rem; border-radius: var(--border-radius); border: none; font-weight: 500; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 0.5rem; background-color: var(--primary); color: white; text-decoration: none; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0; }
+.listItemButton:hover { background-color: var(--primary-dark); }
+.listItemButton i { font-size: 0.9em; }
+/* --- END OF FULL FILE --- */

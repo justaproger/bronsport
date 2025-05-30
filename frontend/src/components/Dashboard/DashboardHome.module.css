@@ -1,0 +1,173 @@
+/* --- START OF FILE frontend/src/components/Dashboard/DashboardHome.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --primary-light: #e8f0fe;
+  --secondary: #34a853;
+  --warning: #fbbc04;
+  --purple: #6f42c1;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --gray-lightest: #f8f9fa;
+  --danger: #ea4335; /* Добавили */
+  --danger-light: #f8d7da; /* Для ошибок */
+  --success: #34a853; /* Добавили */
+  --success-light: #d4edda; /* Для успеха */
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Легкая тень */
+}
+
+/* Общий контейнер (нет необходимости, стили у родителя .content) */
+/* .container { } */
+
+/* --- Шапка секции --- */
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 2rem; /* Увеличили отступ */
+  flex-wrap: wrap; /* Разрешаем перенос */
+  gap: 1rem; /* Отступ между элементами при переносе */
+}
+/* На мобильных выравниваем по левому краю */
+@media (max-width: 575.98px) {
+    .sectionHeader {
+        justify-content: flex-start;
+    }
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0;
+}
+
+/* Кнопка "Новое бронирование" */
+.button {
+  padding: 0.625rem 1.25rem; border-radius: var(--border-radius); border: none;
+  font-weight: 500; cursor: pointer; display: inline-flex; align-items: center;
+  gap: 0.5rem; background-color: var(--primary); color: white; text-decoration: none;
+  font-size: 0.9rem; transition: background-color 0.2s ease; flex-shrink: 0; /* Не сжимать кнопку */
+}
+.button:hover { background-color: var(--primary-dark); }
+.button i { font-size: 0.9em; }
+
+/* --- Сетка статистики --- */
+.statsGrid {
+  display: grid;
+  /* Адаптивные колонки */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Увеличил minmax */
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+/* На очень маленьких экранах - одна колонка */
+@media (max-width: 500px) {
+    .statsGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem; /* Уменьшаем отступ */
+    }
+}
+
+
+.statCard {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background-color: var(--light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1.25rem; /* Уменьшил padding */
+  border: 1px solid var(--gray-lighter); /* Слегка видная рамка */
+  transition: all 0.2s ease;
+}
+ .statCard:hover { /* Легкий эффект при наведении */
+     transform: translateY(-2px);
+     box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+ }
+
+.statIcon {
+  width: 44px; height: 44px; /* Уменьшил */
+  border-radius: var(--border-radius); display: flex; justify-content: center; align-items: center;
+  font-size: 1.4rem; /* Уменьшил */
+  flex-shrink: 0;
+}
+/* Цвета для иконок */
+.iconBlue { background-color: #e8f0fe; color: #1a73e8; }
+.iconGreen { background-color: #e6f4ea; color: #34a853; }
+.iconPurple { background-color: #f3e8fd; color: #6f42c1; }
+/* Добавьте другие цвета при необходимости */
+/* .iconYellow { background-color: #fef7e0; color: #fbbc04; } */
+
+
+.statText { min-width: 0; /* Предотвращение переполнения */ }
+
+.statTitle {
+  color: var(--gray); font-size: 0.8rem; /* Уменьшил */
+  margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-transform: uppercase; /* Для наглядности */
+  letter-spacing: 0.5px;
+}
+
+.statValue {
+  font-size: 1.6rem; /* Уменьшил */
+  font-weight: 700; /* Жирнее */
+  color: var(--dark); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* Загрузка статистики */
+.statsLoading {
+    padding: 2rem;
+    text-align: center;
+    color: var(--gray);
+}
+
+/* --- Секция предстоящих бронирований --- */
+.bookingsSection { margin-top: 2.5rem; /* Увеличил отступ */ }
+
+.bookingsTitle {
+  font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; /* Увеличил отступ */
+  color: var(--dark); padding-bottom: 0.75rem; border-bottom: 1px solid var(--gray-light);
+}
+
+/* Список бронирований */
+.bookingList {
+    position: relative; /* Для индикатора */
+}
+
+/* Индикатор фоновой загрузки */
+.fetchingIndicator {
+    position: absolute;
+    top: -10px; /* Немного выше списка */
+    right: 0;
+    font-size: 0.8rem;
+    color: var(--gray);
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный фон */
+    padding: 2px 8px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.viewAllLinkContainer { text-align: center; margin-top: 1.5rem; }
+.viewAllLink { color: var(--primary); font-weight: 500; text-decoration: none; font-size: 0.9rem;}
+.viewAllLink:hover { text-decoration: underline; }
+
+/* Сообщения */
+.bookingsLoading { /* Отдельный стиль для спиннера броней */
+    padding: 2rem; text-align: center; color: var(--gray);
+}
+.noBookingsMessage {
+  font-style: italic; padding: 1.5rem; text-align: center; color: var(--gray);
+  background-color: var(--gray-lightest); border-radius: var(--border-radius);
+  margin-top: 1rem;
+}
+.errorMessage {
+  color: var(--danger); background-color: var(--danger-light); border: 1px solid #f5c6cb;
+  padding: 1rem; border-radius: var(--border-radius); margin-top: 1rem; text-align: center;
+  font-size: 0.9rem;
+}
+/* --- END OF FILE --- */

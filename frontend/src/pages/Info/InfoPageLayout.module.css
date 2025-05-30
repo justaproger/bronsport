@@ -1,0 +1,153 @@
+/* src/pages/Info/InfoPageLayout.module.css */
+
+:root { /* Переменные */
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --dark: #202124;
+    --light: #ffffff;
+    --gray: #5f6368;
+    --gray-light: #e8eaed;
+    --gray-lighter: #f1f3f5;
+    --gray-lightest: #f8f9fa;
+    --border-radius: 8px;
+    --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .pageWrapper {
+    background-color: var(--gray-lightest);
+    padding: 2rem 0 3rem 0; /* Отступы сверху/снизу */
+    flex-grow: 1; /* Занимает доступное пространство */
+  }
+  
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .pageHeader {
+    margin-bottom: 2rem;
+  }
+  
+  .breadcrumbs {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    color: var(--gray);
+  }
+  .breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover { text-decoration: underline; }
+  .breadcrumbs span { margin: 0 0.5rem; color: var(--gray); }
+  
+  .pageTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  
+  /* Основной layout: сайдбар + контент */
+  .layoutGrid {
+    display: grid;
+    grid-template-columns: 240px 1fr; /* Фикс. ширина сайдбара, остальное контенту */
+    gap: 2rem;
+    align-items: flex-start; /* Выравниваем по верху */
+  }
+  
+  /* Медиа-запрос для скрытия сайдбара на мобильных */
+  @media (max-width: 991.98px) {
+    .layoutGrid {
+      grid-template-columns: 1fr; /* Одна колонка */
+    }
+    .sidebar {
+      display: none; /* Скрываем сайдбар */
+    }
+    /* Можно добавить выпадающий список или табы для мобильной навигации здесь */
+  }
+  
+  /* Сайдбар */
+  .sidebar {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem 0; /* Убрали гориз. padding, т.к. у ссылок он будет */
+    position: sticky;
+    top: 85px; /* Отступ от хедера */
+  }
+  
+  .sidebarNav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  }
+  
+  .navLink {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+  }
+  .navLink:hover {
+      background-color: var(--gray-lightest);
+      color: var(--primary);
+      border-left-color: #ccc;
+  }
+  .navLinkActive {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border-left-color: var(--primary);
+      font-weight: 600;
+  }
+  
+  /* Область контента */
+  .contentArea {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    min-height: 400px; /* Минимальная высота */
+  }
+  
+  /* Стили для контента внутри (заголовки, параграфы и т.д.) */
+  .contentArea h1, .contentArea h2, .contentArea h3 {
+      color: var(--dark);
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+      font-weight: 600;
+  }
+  .contentArea h1:first-child, .contentArea h2:first-child, .contentArea h3:first-child {
+      margin-top: 0;
+  }
+  .contentArea h1 { font-size: 1.8rem; }
+  .contentArea h2 { font-size: 1.5rem; }
+  .contentArea h3 { font-size: 1.25rem; }
+  
+  .contentArea p {
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      color: var(--gray);
+  }
+  .contentArea ul, .contentArea ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem; /* Отступ для списков */
+      color: var(--gray);
+      line-height: 1.7;
+  }
+  .contentArea li {
+      margin-bottom: 0.5rem;
+  }
+  .contentArea a {
+      color: var(--primary);
+  }
+  .contentArea a:hover {
+      text-decoration: underline;
+  }
+  .contentArea strong {
+      font-weight: 600;
+      color: var(--dark);
+  }

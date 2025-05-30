@@ -1,0 +1,2 @@
+INFO 2025-05-30 23:12:08,373 django.utils.autoreload autoreload 10712 7984 Watching for file changes with StatReloader
+INFO 2025-05-30 23:13:15,549 django.utils.autoreload autoreload 10712 7984 C:\Users\soriq\Desktop\unisport\backend\unisport_backend\settings.py changed, reloading.

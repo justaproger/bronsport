@@ -1,0 +1,125 @@
+/* src/components/Universities/ClubCard.module.css */
+
+/* Используем переменные */
+:root {
+    --primary: #1a73e8;
+    --dark: #202124;
+    --light: #ffffff;
+    --gray: #5f6368;
+    --gray-light: #e8eaed;
+    --gray-lighter: #f1f3f5;
+    --border-radius: 8px;
+    --box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    --transition: all 0.2s ease;
+  }
+  
+  .card {
+    border: 1px solid var(--gray-light);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: var(--light);
+    box-shadow: var(--box-shadow);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+  }
+  .card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+  }
+  
+  .image {
+    width: 100%;
+    height: 150px; /* Фиксированная высота */
+    object-fit: cover;
+    background-color: var(--gray-lighter);
+    display: block; /* Убрать отступ снизу */
+  }
+  
+  .details {
+    padding: 1.25rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .name {
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem; /* Увеличил отступ */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--dark);
+  }
+  
+  .nameIcon {
+    color: var(--primary);
+    font-size: 1.1em;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Занимает доступное пространство */
+  }
+  
+  /* Секция с инфо */
+  .infoSection {
+    margin-top: auto; /* Прижимаем к низу */
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem; /* Увеличил отступ */
+  }
+  
+  .schedule {
+    font-size: 0.875rem;
+    color: var(--dark); /* Сделаем потемнее */
+    background-color: var(--gray-lighter);
+    padding: 0.75rem;
+    border-radius: 6px;
+    /* margin: 0 0 1rem 0; - убираем, т.к. отступ через gap */
+    border: 1px solid var(--gray-light);
+    display: flex;
+    align-items: center; /* Выравниваем иконку */
+    gap: 8px;
+  }
+  .schedule i {
+      color: var(--primary);
+      flex-shrink: 0;
+  }
+  .schedule strong {
+      font-weight: 600;
+      margin-right: 4px;
+  }
+  
+  .infoItem {
+    font-size: 0.9rem;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .infoItem i { /* Общий стиль иконки */
+    color: var(--primary);
+    width: 14px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  /* Можно добавить hover эффект для контактов */
+  .infoItem a {
+      color: inherit;
+      text-decoration: none;
+  }
+  .infoItem a:hover {
+      text-decoration: underline;
+      color: var(--dark);
+  }

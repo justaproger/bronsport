@@ -1,0 +1,93 @@
+/* --- START OF FILE frontend/src/components/Universities/UniversityCard.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --primary-light: #e8f0fe;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --box-shadow-hover: 0 4px 12px rgba(0,0,0,0.1);
+  --transition: all 0.2s ease;
+}
+
+.cardLink {
+  display: block; height: 100%; text-decoration: none; color: var(--dark);
+  transition: var(--transition);
+}
+.cardLink:hover .card { box-shadow: var(--box-shadow-hover); transform: translateY(-3px); }
+
+.card {
+  background-color: var(--light); border-radius: var(--border-radius); box-shadow: var(--box-shadow);
+  overflow: hidden; display: flex; flex-direction: column; height: 100%;
+  position: relative; /* Для лого */
+  transition: var(--transition); /* Для плавного ховера */
+  border: 1px solid var(--gray-lighter); /* Добавим рамку */
+}
+
+.image {
+  height: 160px; /* Уменьшим высоту картинки */
+  width: 100%; object-fit: cover; background-color: var(--gray-lighter);
+  border-bottom: 1px solid var(--gray-light); display: block;
+}
+
+.logoContainer {
+  position: absolute;
+  top: 120px; /* Сдвигаем выше (height - 40px) */
+  left: 1.25rem; /* Немного меньше отступ */
+  width: 70px; /* Уменьшим лого */
+  height: 70px;
+  border-radius: 50%; background-color: var(--light);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15); /* Меньше тень */
+  padding: 6px; /* Меньше padding */
+  z-index: 2;
+}
+
+.logo {
+  width: 100%; height: 100%; object-fit: contain; border-radius: 50%; display: block;
+}
+
+.details {
+  padding: 1rem 1.25rem 1.25rem; /* Уменьшили padding */
+  padding-top: 40px; /* Отступ сверху = половина высоты лого + запас */
+  flex-grow: 1; display: flex; flex-direction: column;
+}
+
+.name {
+  font-size: 1.1rem; /* Уменьшили */
+  font-weight: 600; margin-bottom: 0.4rem; color: var(--dark);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; text-overflow: ellipsis;
+  min-height: calc(1.1rem * 1.4 * 2); /* Примерная высота 2х строк */
+  line-height: 1.4;
+}
+
+.location {
+  display: flex; align-items: center; gap: 0.5rem; color: var(--gray);
+  margin-bottom: auto; /* Отодвигает футер вниз */
+  padding-bottom: 1rem; /* Отступ перед футером */
+  font-size: 0.85rem; /* Уменьшили */
+}
+.locationIcon { width: 12px; color: var(--primary); flex-shrink: 0; text-align: center; }
+
+.footer {
+  margin-top: auto; /* Прижимаем к низу */
+  padding-top: 0.75rem; /* Уменьшили */
+  border-top: 1px solid var(--gray-lighter); /* Тонкий разделитель */
+  display: flex; justify-content: flex-end; align-items: center;
+}
+
+.detailsButton {
+  padding: 0.4rem 0.9rem; /* Уменьшили */
+  font-size: 0.8rem; /* Уменьшили */
+  border-radius: 6px; background-color: var(--primary-light); color: var(--primary);
+  border: none; cursor: pointer; font-weight: 500; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 5px; transition: background-color 0.2s ease;
+}
+.detailsButton:hover { background-color: #d2e3fc; }
+.detailsButton i { font-size: 0.8em; }
+/* --- END OF FILE --- */

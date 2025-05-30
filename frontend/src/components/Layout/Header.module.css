@@ -1,0 +1,93 @@
+/* --- START OF FULL FILE frontend/src/components/Layout/Header.module.css --- */
+:root { /* Переменные */
+    --primary: #1a73e8; --primary-dark: #0d47a1; --primary-light: #e8f0fe;
+    --dark: #202124; --light: #ffffff; --gray: #5f6368; --gray-light: #e8eaed;
+    --gray-lighter: #f1f3f5; --gray-lightest: #f8f9fa; --danger: #ea4335;
+    --border-radius: 8px; --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --header-height: 70px; --mobile-menu-width: 280px;
+  }
+
+  .header { background-color: var(--light); box-shadow: var(--box-shadow); padding: 0 1rem; position: sticky; top: 0; z-index: 1000; height: var(--header-height); border-bottom: 1px solid var(--gray-lighter); }
+  .container { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 100%; gap: 1rem; }
+  .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.5rem; font-weight: bold; color: var(--primary); text-decoration: none; flex-shrink: 0; }
+  .logo i { font-size: 1.2em; }
+  @media (max-width: 400px) { .logo span { display: none; } }
+
+  /* Навигация (Десктоп) */
+  .nav { display: flex; gap: 1.5rem; padding: 0 1rem; }
+  @media (max-width: 991.98px) { .nav { display: none; } }
+  .navLink { text-decoration: none; color: var(--dark); font-weight: 500; padding: 0.5rem 0; position: relative; transition: color 0.2s ease; white-space: nowrap; }
+  .navLink::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background-color: var(--primary); transition: width 0.2s ease; }
+  .navLink:hover { color: var(--primary); text-decoration: none; }
+  .navLink:hover::after, .navLinkActive::after { width: 100%; }
+  .navLinkActive { color: var(--primary); font-weight: 600; }
+
+  /* Переключатель языка (Десктоп) */
+  .langSwitcher { display: flex; align-items: center; gap: 0.25rem; margin-left: 1rem; /* Отступ от навигации */ }
+  @media (max-width: 991.98px) { .langSwitcher { display: none; } }
+  .langButton { background: none; border: none; padding: 0.3rem 0.5rem; cursor: pointer; font-weight: 500; color: var(--gray); border-radius: 4px; transition: color 0.2s, background-color 0.2s; font-size: 0.85rem; }
+  .langButton:hover:not(:disabled) { color: var(--primary); background-color: var(--gray-lightest); }
+  .langButtonActive { color: var(--primary); font-weight: 600; cursor: default; }
+  .langButton:disabled { cursor: default; opacity: 0.8; }
+  .langSeparator { color: var(--gray-light); font-size: 0.9rem; }
+
+  /* Действия пользователя (Десктоп) */
+  .actions { display: flex; align-items: center; gap: 0.75rem; margin-left: auto; /* Прижимаем к правому краю */ }
+  @media (max-width: 991.98px) { .actions { display: none; } }
+  .userName { font-weight: 500; color: var(--dark); text-decoration: none; display: flex; align-items: center; gap: 8px; padding: 0.5rem; border-radius: var(--border-radius); transition: background-color 0.2s ease; white-space: nowrap; max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
+  .userName i { font-size: 1.2em; color: var(--gray); flex-shrink: 0; }
+  .userName span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .userName:hover { background-color: var(--gray-lightest); color: var(--primary); text-decoration: none; }
+  .userName:hover i { color: var(--primary); }
+  .button { padding: 0.5rem 1rem; border-radius: var(--border-radius); border: none; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; transition: all 0.2s ease; font-size: 0.9rem; white-space: nowrap; flex-shrink: 0; }
+  .buttonPrimary { background-color: var(--primary); color: white; composes: button; }
+  .buttonPrimary:hover { background-color: var(--primary-dark); }
+  .buttonOutline { background-color: transparent; color: var(--primary); border: 1px solid var(--primary); composes: button; }
+  .buttonOutline:hover { background-color: var(--primary-light); }
+  .logoutButton { padding: 0.6rem; border-radius: var(--border-radius); border: 1px solid transparent; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; transition: all 0.2s ease; font-size: 1rem; background-color: transparent; color: var(--gray); line-height: 1; flex-shrink: 0; }
+  .logoutButton span { display: none; }
+  .logoutButton:hover { color: var(--danger); background-color: rgba(234, 67, 53, 0.05); }
+
+  /* Кнопка Бургер (Мобильные) */
+  .burgerButton { display: none; background: none; border: none; font-size: 1.5rem; color: var(--dark); cursor: pointer; padding: 0.5rem; margin-left: 0.5rem; z-index: 1002; line-height: 1; flex-shrink: 0; }
+  @media (max-width: 991.98px) { .burgerButton { display: block; } }
+
+  /* Мобильное меню */
+  .mobileMenu { position: fixed; top: 0; left: 0; bottom: 0; width: var(--mobile-menu-width); max-width: 85%; background-color: var(--light); box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.1); padding: 0; z-index: 1003; border-right: 1px solid var(--gray-light); transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.3s; overflow-y: auto; visibility: hidden; }
+  .mobileMenuOpen { transform: translateX(0); visibility: visible; transition-delay: 0s; }
+  .mobileMenuOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 1001; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
+  .mobileMenuOpen ~ .mobileMenuOverlay { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+  /* Переключатель языка (Мобильный) */
+  .mobileLangSwitcher { display: flex; justify-content: center; gap: 0.5rem; padding: 1rem 1rem 0.5rem 1rem; }
+  .mobileLangSwitcher .langButton { flex-grow: 1; border: 1px solid var(--gray-light); font-size: 0.9rem; padding: 0.6rem; }
+  .mobileLangSwitcher .langButtonActive { background-color: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+  .mobileLangSwitcher .langButton:disabled { background-color: var(--primary-light); border-color: var(--primary); opacity: 1; }
+
+  /* Навигация в моб. меню */
+  .mobileNav { display: flex; flex-direction: column; padding: 0.5rem 1rem; margin-bottom: 0.5rem; }
+  .mobileNavLink { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1rem; border-radius: var(--border-radius); text-decoration: none; color: var(--dark); font-weight: 500; font-size: 1rem; transition: background-color 0.2s ease, color 0.2s ease; }
+  .mobileNavLink i { width: 20px; text-align: center; color: var(--gray); transition: color 0.2s ease; font-size: 1.1em; flex-shrink: 0; }
+  .mobileNavLink:hover { background-color: var(--gray-lightest); color: var(--primary); }
+  .mobileNavLink:hover i { color: var(--primary); }
+  .mobileNavLinkActive { background-color: var(--primary-light); color: var(--primary); font-weight: 600; }
+  .mobileNavLinkActive i { color: var(--primary); }
+
+  /* Разделитель */
+  .mobileDivider { border: none; border-top: 1px solid var(--gray-lighter); margin: 0.5rem 1rem; }
+
+  /* Действия в моб. меню */
+  .mobileActions { display: flex; flex-direction: column; gap: 0.75rem; padding: 1rem 1rem; }
+  .mobileButton { padding: 0.75rem 1rem; border-radius: var(--border-radius); border: 1px solid transparent; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.75rem; text-decoration: none; transition: all 0.2s ease; font-size: 1rem; width: 100%; }
+  .mobileButton i { font-size: 1em; }
+  .mobileActions .buttonOutline { border-color: var(--primary); }
+  .mobileActions .buttonPrimary { border-color: var(--primary); }
+  .mobileUserLink { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1rem; border-radius: var(--border-radius); text-decoration: none; color: var(--dark); font-weight: 500; font-size: 1rem; transition: background-color 0.2s ease; border: 1px solid var(--gray-light); background-color: var(--gray-lightest); }
+  .mobileUserLink:hover { background-color: var(--gray-lighter); border-color: #ccc; }
+  .mobileUserLink i:first-child { color: var(--gray); font-size: 1.2em; flex-shrink: 0; }
+  .mobileUserLink span { flex-grow: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mobileActionChevron { color: var(--gray); font-size: 0.8em; margin-left: auto; flex-shrink: 0; }
+  .mobileLogoutButton { composes: mobileButton; background-color: transparent; color: var(--danger); border: 1px solid transparent; justify-content: flex-start; padding-left: 1rem; margin-top: 0.5rem; }
+  .mobileLogoutButton:hover { background-color: rgba(234, 67, 53, 0.05); color: var(--danger); }
+  .mobileLogoutButton i { color: var(--danger); width: 20px; text-align: center; }
+/* --- END OF FULL FILE --- */

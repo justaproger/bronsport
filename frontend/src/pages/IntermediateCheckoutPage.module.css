@@ -1,0 +1,164 @@
+/* --- START OF FULL FILE frontend/src/pages/IntermediateCheckoutPage.module.css --- */
+/* (Содержимое идентично ConfirmPaymentPage.module.css) */
+:root {
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --primary-light: #e8f0fe;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --gray-lightest: #f8f9fa;
+  --danger: #ea4335;
+  --success: #34a853;
+  --warning: #fbbc04; /* Добавили для pending статуса */
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-right: 1rem;
+  color: var(--dark);
+}
+
+.statusBadge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+/* Используем стили для Pending */
+.statusPending { background-color: #fff8e1; color: #ffa000; border-color: #ffecb3; }
+/* Остальные стили статусов пока не нужны здесь */
+/* .statusProcessing { ... } */
+/* .statusCompleted { ... } */
+/* .statusFailed, .statusExpired, .statusCancelled { ... } */
+/* .statusDefault { ... } */
+
+
+.body {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+.mobileBody {
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 1.5rem;
+}
+/* Применяем стили для мобильных */
+@media (max-width: 767.98px) {
+    .body {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+    .paymentSection {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid #eee;
+        padding-top: 2rem;
+        margin-top: 2rem;
+    }
+}
+
+
+.detailsContainer h3 {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: var(--dark);
+}
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--gray-lighter);
+}
+.detailItem:last-child {
+    border-bottom: none; margin-bottom: 0; padding-bottom: 0;
+}
+.detailLabel { color: var(--gray); padding-right: 1rem; flex-shrink: 0; }
+.detailValue { font-weight: 500; text-align: right; color: var(--dark); word-break: break-word; }
+
+.statusBox {
+  padding: 1rem; border-radius: var(--border-radius); margin: 1.5rem 0 0 0;
+  text-align: center; border: 1px solid;
+}
+.statusBoxText {
+  font-weight: 600; font-size: 1.1rem; display: flex; align-items: center;
+  justify-content: center; gap: 8px;
+}
+.statusBoxText i { font-size: 1em; }
+.statusBoxTimer {
+  font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8; display: flex;
+  align-items: center; justify-content: center; gap: 5px;
+}
+.statusBoxTimer i { font-size: 1em; }
+
+.paymentSection { border-left: 1px solid #eee; padding-left: 2rem; }
+.mobilePaymentSection { border-left: none; padding-left: 0; border-top: 1px solid #eee; padding-top: 2rem; margin-top: 2rem; }
+
+
+.paymentTitle { font-weight: 600; margin-bottom: 1rem; font-size: 1rem; color: var(--dark); }
+.paymentSubtitle { color: var(--gray); font-size: 0.85rem; margin-bottom: 1rem; }
+
+.totalSection { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;}
+.totalLabel { color: var(--gray); font-size:1rem; }
+.totalValue { font-size: 1.6rem; font-weight: 700; color: var(--success); text-align: right; }
+
+.button { width: 100%; padding: 0.75rem; border: none; border-radius: var(--border-radius); cursor: pointer; font-size: 1rem; font-weight: 500; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 1.5rem; transition: all 0.2s ease; text-decoration: none; }
+.buttonPrimary { background-color: var(--primary); color: white; }
+.buttonPrimary:disabled { opacity: 0.6; cursor: not-allowed; background-color: #adb5bd; }
+.buttonPrimary:not(:disabled):hover { background-color: var(--primary-dark); }
+
+.cancelButtonContainer { text-align: center; margin-top: 1.5rem;}
+.cancelButton { background: none; border: none; color: var(--gray); cursor: pointer; font-size: 0.875rem;}
+.cancelButton:hover { text-decoration: underline; color: var(--dark); }
+
+/* Стили для сообщения об ошибке инициации */
+.errorMessage {
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  margin-top: 1rem; /* Отступ от кнопки */
+  font-size: 0.9rem;
+  text-align: center;
+  border: 1px solid transparent;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+/* Убираем блок симуляции */
+.simulationContainer { display: none; }
+/* --- END OF FULL FILE --- */

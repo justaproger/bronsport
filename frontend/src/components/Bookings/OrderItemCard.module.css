@@ -1,0 +1,198 @@
+/* src/components/Bookings/OrderItemCard.module.css */
+/* --- START OF FULL FILE frontend/src/components/Bookings/OrderItemCard.module.css --- */
+:root {
+  --primary: #1a73e8;
+  --primary-light: #e8f0fe; /* Добавил для hover кнопки QR */
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --gray-lightest: #f8f9fa;
+  --success: #34a853;
+  --warning: #fbbc04;
+  --danger: #ea4335;
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  --transition: all 0.2s ease;
+}
+
+.card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray-light);
+  background-color: var(--light);
+  margin-bottom: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: var(--box-shadow);
+}
+
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--border-radius);
+  object-fit: cover;
+  flex-shrink: 0;
+  background-color: var(--gray-lighter);
+}
+
+.info {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; 
+  min-width: 250px;
+}
+
+.statusBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  height: fit-content;
+  align-self: flex-start;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.statusConfirmed { background-color: rgba(52, 168, 83, 0.1); color: #28a745; border-color: #a3d9a5; }
+.statusPending { background-color: rgba(251, 188, 4, 0.1); color: #fbbc04; border-color: #ffeeba; }
+.statusCompleted { background-color: rgba(66, 133, 244, 0.1); color: #0d6efd; border-color: #b8d4fe; }
+.statusCancelledUser { background-color: rgba(108, 117, 125, 0.1); color: #6c757d; border-color: #cfd2d6; } /* Пример для отмены пользователем */
+.statusCancelledAdmin, .statusFailed { background-color: rgba(234, 67, 53, 0.1); color: #dc3545; border-color: #f5c6cb; }
+.statusExpired { background-color: #e9ecef; color: #495057; border-color: #dee2e6; } /* Пример для истекшего */
+.statusRefund, .statusRefunded { background-color: rgba(13,202,240,0.1); color: #0dcaf0; border-color: #9eeaf9;} /* Пример для возврата */
+.statusDefault { background-color: #e8eaed; color: #5f6368; border-color: #dee2e6; }
+
+.facilityName {
+  font-weight: 600;
+  color: var(--dark);
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+
+.universityName {
+  color: var(--gray);
+  font-size: 0.875rem;
+}
+
+.orderTypeLabel {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--primary);
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dateTime {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--gray);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+.dateTime i {
+  color: var(--primary);
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.bookingCodeContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.bookingCode {
+  font-family: monospace;
+  background-color: var(--gray-lighter);
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  font-size: 0.8em;
+  color: var(--dark);
+}
+
+/* --- НОВОЕ: Стиль для кнопки показа QR --- */
+.qrShowButton {
+    background: none;
+    border: 1px solid var(--gray-light);
+    color: var(--primary);
+    padding: 6px 8px; /* Меньше padding */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex; /* Для выравнивания иконки */
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* Убираем лишнюю высоту */
+}
+.qrShowButton:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary);
+}
+.qrShowButton i {
+    font-size: 1.1em; /* Размер иконки */
+}
+/* ------------------------------------ */
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+@media (max-width: 480px) { /* На маленьких экранах кнопки могут идти в ряд */
+    .actions {
+        flex-direction: row;
+        width: 100%;
+        margin-top: 1rem;
+        justify-content: flex-end;
+    }
+}
+
+
+.actionButton, .primaryLink {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray-light);
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--light);
+  color: var(--gray);
+  font-size: 0.875rem;
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 34px;
+  transition: var(--transition);
+}
+.actionButton:hover, .primaryLink:hover {
+    background-color: var(--gray-lighter);
+    border-color: #ccc;
+    color: var(--dark);
+}
+.actionButton i, .primaryLink i {
+    font-size: 0.9em;
+}
+
+.primaryLink {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.primaryLink:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+/* --- END OF FULL FILE --- */

@@ -1,0 +1,202 @@
+/* --- START OF FILE frontend/src/pages/HomePage.module.css --- */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* Переменные */
+:root {
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --primary-light: #e8f0fe;
+  --secondary: #34a853;
+  --secondary-dark: #0d652d;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --gray-lightest: #f8f9fa;
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --box-shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  --transition: all 0.2s ease;
+}
+
+/* Обертка для страницы, если нужна */
+.pageWrapper {
+    /* Стили обертки, если необходимы */
+}
+
+/* --- Hero Section --- */
+.hero {
+  background: linear-gradient(rgba(13, 71, 161, 0.75), rgba(26, 115, 232, 0.65)), url('/images/backgrounds/hero-bg.jpg') center center/cover no-repeat;
+  color: var(--light);
+  padding: clamp(3rem, 10vh, 6rem) 1rem; /* Уменьшили padding */
+  text-align: center;
+  position: relative;
+}
+
+.heroContent {
+  position: relative; z-index: 1; max-width: 800px; margin: 0 auto;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 6vw, 3.2rem); /* Слегка уменьшили */
+  margin-bottom: 1rem; font-weight: 700; line-height: 1.2;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.heroSubtitle {
+  font-size: clamp(1rem, 3vw, 1.15rem); /* Слегка уменьшили */
+  margin-bottom: 2rem; /* Уменьшили отступ */
+  opacity: 0.95; max-width: 650px; margin-left: auto; margin-right: auto;
+  line-height: 1.6;
+}
+
+.heroCta {
+  display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+}
+/* Адаптация кнопок в hero */
+@media (max-width: 575.98px) {
+    .heroCta {
+        flex-direction: column; /* Кнопки в столбик */
+        align-items: center; /* Центрируем */
+        gap: 0.75rem;
+    }
+    .heroCta .button { /* Растягиваем кнопки */
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+/* --- Базовый стиль кнопки --- */
+.button {
+  padding: 0.8rem 1.8rem; font-size: 1rem; /* Чуть меньше */
+  border-radius: var(--border-radius); border: none; font-weight: 500; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;
+  transition: all 0.2s ease; white-space: nowrap;
+}
+.button i { font-size: 1em; }
+
+.buttonSecondary { background-color: var(--secondary); color: white; composes: button; }
+.buttonSecondary:hover { background-color: var(--secondary-dark); transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+
+.buttonOutline { background-color: rgba(255, 255, 255, 0.95); color: var(--primary); border: 1px solid transparent; composes: button; }
+.buttonOutline:hover { background-color: var(--light); transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+
+
+/* --- Search Section --- */
+.searchSection {
+  background-color: var(--light); border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-lg);
+  padding: 1.5rem 2rem; margin: -2.5rem auto 3rem auto; /* Поднимаем чуть меньше */
+  position: relative; z-index: 10; max-width: 1000px; border: 1px solid var(--gray-light);
+}
+@media (max-width: 575.98px) {
+    .searchSection { padding: 1.5rem 1rem; margin-top: -2rem;} /* Меньше паддинг на мобильных */
+}
+
+
+.searchTitle { /* Добавленный заголовок */
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+}
+
+.searchForm {
+  display: grid;
+  /* Адаптивная сетка */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Увеличил minmax */
+  gap: 1rem 1.25rem;
+  align-items: flex-end; /* Выравнивание по нижнему краю */
+}
+/* На мобильных можно сделать 1 или 2 колонки */
+@media (max-width: 767.98px) {
+    .searchForm { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+}
+@media (max-width: 480px) {
+    .searchForm { grid-template-columns: 1fr; } /* Одна колонка */
+    .searchForm .formGroup { margin-bottom: 0.5rem; } /* Уменьшаем отступ между полями */
+    .searchForm .formGroup:last-child { margin-bottom: 0; }
+    .searchButton { margin-top: 0.5rem; } /* Небольшой отступ для кнопки */
+}
+
+
+.formGroup { display: flex; flex-direction: column; gap: 0.5rem; }
+.label { font-weight: 500; color: var(--dark); font-size: 0.875rem; }
+.input, .select {
+  padding: 0.75rem; border: 1px solid var(--gray-light); border-radius: var(--border-radius);
+  font-size: 0.95rem; /* Чуть меньше */ height: 44px; /* Уменьшил высоту */
+  box-sizing: border-box; width: 100%;
+}
+.input:focus, .select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15); }
+.select { cursor: pointer; background-color: var(--light); }
+/* Убираем стрелку по умолчанию */
+.select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%235f6368' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 16px 12px; padding-right: 2.5rem; /* Место для стрелки */ }
+
+
+.searchButton {
+  composes: button; background-color: var(--primary); color: white;
+  height: 44px; width: 100%; font-size: 1rem; padding: 0.75rem 1.5rem;
+}
+.searchButton:hover { background-color: var(--primary-dark); }
+.searchButton i { margin-right: 8px; }
+
+
+/* --- Общие стили секций --- */
+.section { padding: 3rem 0; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+.sectionTitle {
+  font-size: clamp(1.5rem, 5vw, 1.75rem); /* Адаптивный размер */
+  font-weight: 600; margin-bottom: 2.5rem; padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--gray-light); color: var(--dark); text-align: center;
+}
+.loadingPlaceholder, .noDataMessage {
+    padding: 2rem; text-align: center; color: var(--gray); font-style: italic;
+}
+
+
+/* --- Секция Слайдера --- */
+.sliderSection { padding-top: 0; /* Убираем верхний отступ, если он есть */ }
+.swiperContainer { padding-bottom: 3.5rem; position: relative; margin: 0 -10px; /* Компенсация padding карточек */ }
+.swiperSlide { height: auto; padding: 0 10px; /* Добавляем padding, чтобы тени были видны */}
+.swiperPagination {
+    position: absolute; bottom: 0px !important; left: 50% !important; transform: translateX(-50%) !important;
+    width: auto !important;
+    :global(.swiper-pagination-bullet) { background-color: var(--gray) !important; opacity: 0.4 !important; transition: background-color 0.2s, opacity 0.2s; margin: 0 4px !important; }
+    :global(.swiper-pagination-bullet-active) { background-color: var(--primary) !important; opacity: 1 !important; }
+}
+.swiperButtonPrev, .swiperButtonNext {
+    position: absolute; top: calc(50% - 2rem); /* Поднимаем чуть выше центра */ transform: translateY(-50%); z-index: 10;
+    cursor: pointer; background-color: rgba(255, 255, 255, 0.9); color: var(--primary) !important;
+    width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); transition: background-color 0.2s ease, color 0.2s ease;
+}
+.swiperButtonPrev:hover, .swiperButtonNext:hover { background-color: var(--light); color: var(--primary-dark); }
+.swiperButtonPrev { left: 0px; } /* Убрал отступ */
+.swiperButtonNext { right: 0px; }
+.swiperButtonPrev i, .swiperButtonNext i { font-size: 1rem; }
+/* Класс для неактивных стрелок */
+.swiperButtonDisabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+/* Скрываем стрелки на мобильных */
+@media (max-width: 767.98px) { .swiperButtonPrev, .swiperButtonNext { display: none; } }
+
+
+/* --- Секция "Как это работает" --- */
+.howItWorksGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.stepCard {
+  text-align: center; padding: 2rem 1.5rem; background-color: var(--light);
+  border-radius: var(--border-radius); box-shadow: var(--box-shadow); display: flex;
+  flex-direction: column; align-items: center; border-top: 4px solid transparent;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stepCard:hover { transform: translateY(-5px); border-top-color: var(--primary); box-shadow: var(--box-shadow-lg); }
+.stepIcon {
+  width: 60px; height: 60px; background-color: var(--primary-light); color: var(--primary);
+  font-size: 1.6rem; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; margin: 0 auto 1.5rem; flex-shrink: 0;
+}
+.stepTitle { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--dark); }
+.stepText { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+/* --- END OF FILE --- */

@@ -1,0 +1,149 @@
+  /* src/components/Facilities/SubscriptionForm.module.css */
+  :root {
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --dark: #202124;
+    --gray: #5f6368;
+    --gray-light: #e8eaed;
+    --gray-lighter: #f1f3f5;
+    --gray-lightest: #f8f9fa;
+    --danger: #ea4335;
+    --border-radius: 8px;
+    --success-color: #28a745; /* Для доступных мест */
+  }
+  
+  .formSection {
+    margin-bottom: 1.5rem;
+  }
+  .formSection:last-child {
+      margin-bottom: 0;
+  }
+  
+  .label {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    display: block;
+    font-size: 0.9rem;
+    color: var(--dark);
+  }
+  
+  .twoColGrid {
+    display: grid;
+    gap: 1rem 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Адаптивные колонки */
+  }
+  
+  .input, .select {
+    padding: 0.75rem;
+    border: 1px solid var(--gray-light);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--light);
+    height: 44px; /* Для выравнивания с кнопками */
+  }
+  .input:focus, .select:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+  }
+  
+  .dayGrid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(55px, 1fr)); /* Чуть шире для названий дней */
+  }
+  
+  .timeGrid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Шире для времени + кол-ва мест */
+  }
+  
+  .checkboxButton {
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: var(--light);
+    color: #333;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    user-select: none;
+    font-size: 0.875rem;
+    min-height: 38px; /* Уменьшил */
+    display: flex; 
+    flex-direction: column; /* Для времени и кол-ва мест */
+    align-items: center;
+    justify-content: center;
+    line-height: 1.3; /* Для многострочного контента */
+  }
+  
+  .checkboxButtonSelected {
+    border: 2px solid var(--primary);
+    background-color: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
+    padding: calc(0.5rem - 1px);
+  }
+  
+  .checkboxButtonDisabled {
+    cursor: not-allowed !important; /* Важно, чтобы перебить другие стили */
+    border-style: dashed !important;
+    border-color: #ced4da !important;
+    background-color: var(--gray-lightest) !important;
+    color: #adb5bd !important;
+    opacity: 0.7 !important;
+  }
+  .checkboxButtonDisabled .spotsAvailable { /* Скрываем кол-во мест, если кнопка задизейблена */
+      display: none;
+  }
+  
+  .checkboxButton:not(.checkboxButtonDisabled):not(.checkboxButtonSelected):hover {
+      border-color: var(--primary);
+      background-color: #f5f9ff;
+  }
+
+  /* Стили для отображения количества свободных мест в кнопке времени */
+  .spotsAvailable {
+      font-size: 0.7rem;
+      color: var(--success-color);
+      margin-top: 3px; /* Небольшой отступ от времени */
+      font-weight: 500;
+      display: block; /* Чтобы было на новой строке */
+  }
+  .spotsAvailableSelected { /* Для выбранного слота */
+      color: var(--primary); /* Или другой цвет, чтобы читалось на синем фоне */
+      opacity: 0.9;
+  }
+  
+  .errorMessage, .infoMessage, .noSlotsMessage {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+  }
+  .errorMessage { color: var(--danger); background-color: #f8d7da; border: 1px solid #f5c6cb; }
+  .infoMessage { color: var(--gray); background-color: var(--gray-lightest); border: 1px solid var(--gray-light); }
+  .noSlotsMessage { color: var(--gray); font-style: italic; text-align: center; padding: 1rem 0;}
+
+  .loadingContainer {
+      padding: 2rem; text-align: center;
+  }
+  .helperTextError { /* Для сообщений "Выберите хотя бы один..." */
+      display: block;
+      color: var(--danger);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+  }
+
+  .fetchingIndicator { /* Индикатор фонового обновления */
+      position: absolute; /* Можно позиционировать относительно родителя формы */
+      top: 5px; right: 5px;
+      font-size: 0.8rem; color: var(--gray);
+      background-color: rgba(248, 249, 250, 0.8);
+      padding: 3px 8px; border-radius: 4px;
+      z-index: 10; display: flex; align-items: center; gap: 5px;
+  }

@@ -1,0 +1,104 @@
+/* src/pages/BookingConfirmationPrint.css */
+/* --- START OF FULL FILE frontend/src/pages/BookingConfirmationPrint.css --- */
+@media print {
+    body {
+        background-color: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Скрываем все, что не является частью .pageWrapper */
+    body > :not(.pageWrapper) {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    /* Скрываем хедер и футер, если они вне .pageWrapper (обычно так и есть) */
+    /* Предполагаем, что у Header и Footer есть уникальные классы или теги */
+    header.header, footer.footer { /* Замените .header и .footer на реальные селекторы, если они другие */
+        display: none !important;
+        visibility: hidden !important;
+    }
+    /* Скрываем React Query Devtools */
+    div[aria-label="React Query Devtools"] {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    /* Скрываем Hot Toasts */
+    div[role="status"][aria-live="polite"] { /* Типичный контейнер для react-hot-toast */
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+
+    .pageWrapper,
+    .pageWrapper > .container,
+    .pageWrapper > .container > .card {
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        background-color: #fff !important;
+        border-radius: 0 !important;
+    }
+
+    /* Отступы для основного контента на печати */
+    .pageWrapper > .container > .card {
+        padding: 20mm 15mm !important; /* Поля для печати A4 */
+        box-sizing: border-box;
+    }
+
+    /* Скрываем кнопки действий, кроме кнопки печати (которая тоже будет скрыта) */
+    .pageWrapper > .container > .card > .actions {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    /* Контейнер кнопки печати тоже скрываем */
+     .pageWrapper > .container > .card > .printButtonContainer {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+
+    .detailsCard {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        padding: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .title, .message, .sectionTitle, .detailLabel, .detailValue, .qrCodeHint, .qrCodeSection h4,
+    .detailValueBookingCode, .statusSuccess, .totalAmountValue {
+        color: #000 !important;
+        background-color: transparent !important; /* Убираем фон у bookingCode */
+    }
+
+    .confirmationIcon {
+        background-color: #28a745 !important;
+        color: #fff !important;
+        border: 1px solid #28a745;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .qrCodeSection {
+        page-break-inside: avoid;
+        margin-top: 1.5rem;
+    }
+    .qrCodeSection canvas {
+        display: block !important;
+        margin: 1rem auto !important; /* Отступы для QR */
+    }
+
+    a {
+        text-decoration: none !important;
+        color: inherit !important;
+    }
+    a[href]:after { /* Не показываем URL ссылок */
+        content: "";
+    }
+}
+/* --- END OF FULL FILE --- */

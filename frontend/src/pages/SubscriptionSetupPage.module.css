@@ -1,0 +1,186 @@
+/* --- START OF FILE frontend/src/pages/SubscriptionSetupPage.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --primary-light: #e8f0fe;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --gray-lightest: #f8f9fa;
+  --danger: #ea4335;
+  --warning: #fbbc04; /* Для кнопки расчета */
+  --success: #34a853; /* Для цены */
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --transition: all 0.2s ease;
+  --summary-width: 340px; /* Ширина сводки */
+}
+
+.pageWrapper {
+background-color: var(--gray-lightest);
+padding-bottom: 3rem;
+min-height: calc(100vh - 70px);
+}
+
+.container {
+max-width: 992px; /* Макс ширина для layout формы и сводки */
+margin: 2rem auto;
+padding: 0 1rem;
+}
+
+/* --- Шапка страницы --- */
+.pageHeader {
+padding-bottom: 1rem;
+border-bottom: 1px solid var(--gray-light);
+margin-bottom: 2rem;
+}
+.breadcrumbs { font-size: 0.875rem; margin-bottom: 0.5rem; color: var(--gray); }
+.breadcrumbs a { color: var(--primary); text-decoration: none; }
+.breadcrumbs a:hover { text-decoration: underline; }
+.breadcrumbs span { margin: 0 0.5rem; color: var(--gray); }
+.pageTitle { font-size: clamp(1.5rem, 5vw, 1.8rem); font-weight: 700; color: var(--dark); margin-bottom: 0.25rem; }
+.pageSubtitle { font-size: 0.95rem; color: var(--gray); }
+
+/* --- Основной layout: Форма + Сводка --- */
+.layoutGrid {
+display: grid;
+/* На десктопе: форма слева, сводка справа */
+grid-template-columns: minmax(0, 1fr) var(--summary-width);
+gap: 2rem;
+align-items: flex-start; /* Выравнивание по верху */
+}
+
+/* Медиа-запрос для планшетов и мобильных (< 992px) */
+@media (max-width: 991.98px) {
+.layoutGrid {
+  grid-template-columns: 1fr; /* Одна колонка */
+  gap: 1.5rem;
+}
+.summaryContainer {
+  position: static; /* Убираем sticky */
+  top: auto;
+  width: 100%;
+  margin-top: 0; /* Убираем отступ, т.к. теперь в потоке */
+}
+}
+
+/* --- Контейнер Формы --- */
+.formContainer {
+background-color: var(--light);
+border-radius: var(--border-radius);
+box-shadow: var(--box-shadow);
+padding: 1.5rem; /* Уменьшили */
+border: 1px solid var(--gray-lighter);
+}
+.formContainer h2 {
+  font-size: 1.3rem; /* Уменьшили */
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gray-light);
+  color: var(--dark);
+}
+
+/* --- Контейнер Сводки --- */
+.summaryContainer {
+background-color: var(--gray-lightest); /* Другой фон для сводки */
+border-radius: var(--border-radius);
+border: 1px solid var(--gray-light);
+padding: 1.5rem;
+height: fit-content;
+position: sticky; /* Липкая сводка */
+top: calc(var(--header-height) + 1rem); /* Отступ от хедера */
+}
+
+.summaryTitle {
+font-size: 1.1rem; /* Уменьшили */
+font-weight: 600;
+margin-bottom: 1rem;
+padding-bottom: 0.5rem;
+border-bottom: 1px solid var(--gray-light);
+color: var(--dark);
+}
+
+.summaryItem {
+display: flex; justify-content: space-between; align-items: flex-start;
+margin-bottom: 0.75rem; padding-bottom: 0.75rem;
+border-bottom: 1px solid var(--gray-light); /* Граница темнее */
+font-size: 0.9rem;
+}
+.summaryItem:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.summaryLabel { color: var(--gray); padding-right: 1rem; flex-shrink: 0; }
+.summaryValue { font-weight: 500; text-align: right; color: var(--dark); word-break: break-word; }
+
+/* --- Секция расчета цены --- */
+.priceCalcSection {
+margin-top: 1.5rem;
+padding-top: 1.5rem;
+border-top: 1px solid var(--gray-light);
+text-align: center; /* Центрируем кнопку и цену */
+}
+
+.priceDisplay {
+font-size: 1.1rem;
+font-weight: 500; /* Не слишком жирно */
+margin-top: 1rem; /* Отступ от кнопки */
+color: var(--dark);
+}
+.priceDisplay strong {
+  margin-left: 5px;
+  color: var(--success);
+  font-weight: 700; /* Жирнее для цены */
+  font-size: 1.2em; /* Крупнее цена */
+}
+
+/* --- Общие стили кнопок --- */
+.button {
+padding: 0.625rem 1.25rem; border-radius: var(--border-radius); border: none;
+font-weight: 500; cursor: pointer; display: inline-flex; align-items: center;
+gap: 0.5rem; justify-content: center; transition: all 0.2s ease;
+text-decoration: none; font-size: 0.95rem; /* Немного крупнее */
+}
+.button i { font-size: 0.9em; }
+.button:disabled { background-color: #adb5bd; cursor: not-allowed; opacity: 0.7; }
+.button:disabled:hover { background-color: #adb5bd; }
+
+/* Кнопка расчета цены */
+.calcButton {
+composes: button;
+background-color: var(--warning); /* Желтый */
+color: var(--dark); /* Темный текст на желтом */
+width: auto; /* Ширина по контенту */
+margin-bottom: 0.5rem; /* Отступ снизу до цены */
+}
+.calcButton:not(:disabled):hover { background-color: #f8b000; } /* Темнее желтый */
+
+/* Кнопка подтверждения */
+.submitButton {
+composes: button;
+background-color: var(--primary);
+color: white;
+width: 100%; /* На всю ширину */
+margin-top: 1rem; /* Отступ от цены */
+}
+.submitButton:not(:disabled):hover { background-color: var(--primary-dark); }
+
+/* --- Сообщения --- */
+.errorText { /* Ошибки расчета или инициации */
+color: var(--danger);
+font-size: 0.85rem;
+margin-top: 0.75rem;
+text-align: center;
+}
+
+.loginPrompt { /* Приглашение войти */
+text-align: center; margin-top: 1rem; color: var(--gray); font-size: 0.875rem;
+}
+.loginPrompt a { color: var(--primary); font-weight: 500; }
+.loginPrompt a:hover { text-decoration: underline; }
+
+.errorMessage { /* Общая ошибка загрузки страницы */
+  padding: 1rem; border-radius: var(--border-radius); margin: 1rem 0; text-align: center;
+  color: var(--danger); background-color: #f8d7da; border: 1px solid #f5c6cb;
+}
+/* --- END OF FILE --- */

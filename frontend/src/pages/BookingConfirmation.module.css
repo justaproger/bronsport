@@ -1,0 +1,267 @@
+/* src/pages/BookingConfirmation.module.css */
+/* --- START OF FULL FILE frontend/src/pages/BookingConfirmation.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --secondary: #34a853; /* Используем для кнопки печати */
+  --secondary-dark: #0d652d;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --gray-lightest: #f8f9fa;
+  --success: #28a745;
+  --success-light: #d4edda;
+  --danger: #dc3545;
+  --danger-light: #f8d7da;
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* --- НОВОЕ: Обертка для print стилей --- */
+.pageWrapper {
+    /* Пусто, стили для печати будут в BookingConfirmationPrint.css */
+}
+/* ------------------------------------- */
+
+.container {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.card {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    padding: 3rem;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+@media (max-width: 576px) {
+    .card { padding: 2rem 1.5rem; }
+}
+
+
+.confirmationIcon {
+  width: 80px;
+  height: 80px;
+  background-color: var(--success);
+  color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem auto;
+  font-size: 2.5rem;
+  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+.confirmationIcon i {
+    line-height: 1;
+}
+
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--dark);
+}
+
+.message {
+  font-size: 1.125rem;
+  color: var(--gray);
+  margin: 0 auto 2rem auto;
+  max-width: 450px;
+  line-height: 1.6;
+}
+
+.detailsCard {
+  background-color: var(--light); /* Был --gray-lightest, сделал --light для контраста на печати */
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: none; /* Убрал тень, т.к. есть рамка */
+  border: 1px solid var(--gray-light);
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--gray-light);
+  color: var(--dark);
+  text-align: left;
+}
+
+.detailList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Адаптивные колонки */
+  gap: 1rem 1.5rem; /* Отступы между элементами */
+}
+
+.detailItem {
+  margin-bottom: 0.5rem; /* Уменьшил отступ, т.к. есть gap у grid */
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gray-lighter);
+}
+.detailItem:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+
+.detailLabel {
+  font-size: 0.8rem;
+  color: var(--gray);
+  margin-bottom: 0.25rem;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detailValue {
+  font-weight: 500;
+  color: var(--dark);
+  word-break: break-word;
+  font-size: 0.95rem;
+}
+.detailValueBookingCode { /* Отдельный стиль для кода заказа */
+    composes: detailValue;
+    font-family: monospace;
+    background-color: var(--gray-lighter);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.statusSuccess {
+  composes: detailValue;
+  color: var(--success);
+  font-weight: 600;
+}
+
+.totalAmountValue { /* Стиль для итоговой суммы */
+    composes: detailValue;
+    font-size: 1.1em; /* Чуть крупнее */
+    font-weight: bold;
+    color: var(--success);
+}
+
+.qrCodeSection {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gray-light);
+    text-align: center;
+}
+.qrCodeSection h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+.qrCodeSection canvas { /* Чтобы QR был по центру */
+    display: block !important;
+    margin: 0 auto 1rem auto !important;
+}
+.qrCodeHint {
+    font-size: 0.85rem;
+    color: var(--gray);
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.4;
+}
+
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  align-items: center;
+}
+@media (min-width: 576px) {
+    .actions {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+/* --- НОВЫЕ СТИЛИ для контейнера кнопки печати --- */
+.printButtonContainer {
+    margin-top: 0; /* Убираем верхний отступ, если это отдельный блок */
+    margin-bottom: 1.5rem; /* Отступ до основных кнопок */
+    width: 100%; /* Растягиваем на всю ширину для центрирования кнопки */
+    display: flex; /* Для центрирования */
+    justify-content: center;
+}
+.printAction { /* Для самой кнопки печати */
+    min-width: 250px !important; /* Делаем кнопку пошире */
+}
+/* ----------------------------------------------- */
+
+.button {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  min-width: 200px;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+.button i { font-size: 1em; }
+
+.buttonPrimary {
+  composes: button;
+  background-color: var(--primary);
+  color: white;
+}
+.buttonPrimary:hover {
+    background-color: var(--primary-dark);
+}
+
+.buttonOutline {
+  composes: button;
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+.buttonOutline:hover {
+    background-color: var(--primary-light);
+}
+
+/* --- НОВОЕ: Стиль для кнопки "Распечатать/Сохранить" --- */
+.buttonSecondary {
+    composes: button;
+    background-color: var(--secondary);
+    color: white;
+}
+.buttonSecondary:hover {
+    background-color: var(--secondary-dark);
+}
+/* ---------------------------------------------------- */
+
+
+.cardLoading, .cardError { /* Стили для состояний загрузки/ошибки */
+    padding: 3rem 1rem;
+    text-align: center;
+}
+.cardError h2 {
+    color: var(--danger);
+    margin-bottom: 1rem;
+}
+.cardError p {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+}
+/* --- END OF FULL FILE --- */

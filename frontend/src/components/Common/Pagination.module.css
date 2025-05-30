@@ -1,0 +1,85 @@
+/* src/components/Common/Pagination.module.css */
+
+:root { /* Переменные */
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --light: #ffffff;
+    --dark: #202124;
+    --gray: #5f6368;
+    --gray-light: #e8eaed;
+    --border-radius: 8px;
+    --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem; /* Отступ сверху для всего блока */
+    user-select: none; /* Запретить выделение кнопок */
+  }
+  
+  .list {
+    display: flex;
+    gap: 0.5rem; /* Отступ между кнопками */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .item {
+    width: 38px; /* Немного увеличил */
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius);
+    background-color: var(--light);
+    color: var(--dark);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid var(--gray-light);
+    font-size: 0.9rem; /* Размер текста/иконок */
+    font-weight: 500;
+  }
+  
+  .itemActive {
+    background-color: var(--primary);
+    color: var(--light);
+    border-color: var(--primary);
+    font-weight: 600;
+    cursor: default; /* Активная страница не кликабельна */
+  }
+  
+  .itemDisabled {
+    color: #ccc; /* Светло-серый для неактивных стрелок */
+    cursor: not-allowed;
+    background-color: var(--light); /* Оставляем белый фон */
+    opacity: 0.6;
+  }
+  
+  .item:not(.itemActive):not(.itemDisabled):hover {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+  
+  /* Стили для иконок стрелок */
+  .item i {
+      font-size: 0.8em; /* Иконки чуть меньше текста */
+  }
+  
+  /* Точки (ellipsis) */
+  .ellipsis {
+      composes: item; /* Наследуем базовые стили */
+      cursor: default;
+      box-shadow: none;
+      border: none;
+      background-color: transparent;
+      color: var(--gray);
+  }
+  .ellipsis:hover { /* Убираем ховер для точек */
+      background-color: transparent;
+      color: var(--gray);
+      border: none;
+  }

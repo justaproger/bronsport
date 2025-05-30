@@ -1,0 +1,112 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %} {# Загружаем теги i18n и static #}
+
+{# --- Дополнительные стили или скрипты для этой страницы --- #}
+{% block extrastyle %}
+    {{ block.super }} {# Включаем стили из базового шаблона #}
+    {# Можно добавить свои стили, если нужно #}
+    {# <link rel="stylesheet" href="{% static 'admin/css/my_dashboard.css' %}"> #}
+{% endblock %}
+
+{# --- Тип колонки (одна основная) --- #}
+{% block coltype %}colM{% endblock %}
+
+{# --- Класс для body --- #}
+{% block bodyclass %}{{ block.super }} dashboard index{% endblock %}
+
+{# --- Хлебные крошки (не нужны на главной админки) --- #}
+{% block breadcrumbs %}{% endblock %}
+
+{# --- Основной контент --- #}
+{% block content %}
+<div id="content-main">
+
+    {# --- НАШ КАСТОМНЫЙ БЛОК ССЫЛКИ НА СТАТИСТИКУ --- #}
+    {% comment %}
+        Показываем этот блок только пользователям, которые являются сотрудниками (is_staff).
+        Реальный доступ к странице статистики контролируется декоратором на самом view.
+        Мы используем имя URL 'admin:dashboard_statistics', которое задали в dashboard/admin.py в методе get_urls.
+    {% endcomment %}
+    {% if request.user.is_staff %}
+    <div class="app-dashboard module"> {# Используем стандартные классы модуля админки #}
+        <table>
+        <caption>
+             {# Ссылка на страницу статистики #}
+             <a href="{% url 'admin:dashboard_statistics' %}" class="section" title="{% translate 'View statistics dashboard' %}">
+                {# Используем FontAwesome иконку (если FontAwesome подключен к админке) или просто текст #}
+                <i class="fas fa-chart-line" style="margin-right: 5px;"></i> {# Пример иконки #}
+                {% translate 'Статистика и Отчеты' %} {# Название секции #}
+            </a>
+        </caption>
+            <tbody>
+                <tr class="model-statistics">
+                {# Ссылка на саму страницу #}
+                <th scope="row"><a href="{% url 'admin:dashboard_statistics' %}">{% translate 'Обзор Статистики' %}</a></th>
+                {# Пустая ячейка на месте кнопки "Добавить" #}
+                <td> </td>
+                {# Ссылка "Просмотреть" (ведет туда же) #}
+                <td><a href="{% url 'admin:dashboard_statistics' %}" class="viewlink">{% translate 'View' %}</a></td>
+            </tr>
+            {# Сюда можно будет добавить ссылки на другие кастомные страницы или отчеты #}
+            {# <tr class="model-myreport"> <th scope="row"><a href="...">Другой отчет</a></th>...</tr> #}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+    {# --- КОНЕЦ КАСТОМНОГО БЛОКА --- #}
+
+
+    {# --- Стандартный вывод списка приложений и моделей --- #}
+    {% if app_list %}
+        {% for app in app_list %}
+            {# Пропускаем наше приложение 'dashboard' в этом списке, так как мы вынесли его выше #}
+            {% if app.app_label != 'dashboard' %}
+                <div class="app-{{ app.app_label }} module collapsible"> {# Добавили collapsible #}
+                <table>
+                <caption>
+                     {# Ссылка на страницу приложения #}
+                    <a href="{{ app.app_url }}" class="section" title="{% blocktranslate with name=app.name %}Models in the {{ name }} application{% endblocktranslate %}">{{ app.name }}</a>
+                </caption>
+                {% for model in app.models %}
+                    <tr class="model-{{ model.object_name|lower }}">
+                    {# Ссылка на список объектов модели #}
+                    {% if model.admin_url %}
+                        <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+                    {% else %}
+                        <th scope="row">{{ model.name }}</th>
+                    {% endif %}
+
+                    {# Ссылка "Добавить" #}
+                    {% if model.add_url %}
+                        <td><a href="{{ model.add_url }}" class="addlink">{% translate 'Add' %}</a></td>
+                    {% else %}
+                        <td> </td>
+                    {% endif %}
+
+                    {# Ссылка "Изменить" или "Просмотреть" #}
+                    {% if model.admin_url and show_changelinks|default:True %} {# Проверяем show_changelinks #}
+                        {% if model.view_only %}
+                        <td><a href="{{ model.admin_url }}" class="viewlink">{% translate 'View' %}</a></td>
+                        {% else %}
+                        <td><a href="{{ model.admin_url }}" class="changelink">{% translate 'Change' %}</a></td>
+                        {% endif %}
+                    {% elif show_changelinks|default:True %}
+                        <td> </td>
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+                </table>
+                </div>
+            {% endif %} {# Конец if app.app_label != 'dashboard' #}
+        {% endfor %}
+    {% else %}
+        {# Сообщение, если у пользователя нет прав ни на одно приложение #}
+        <p>{% translate 'You don’t have permission to view or edit anything.' %}</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{# --- Сайдбар (оставляем стандартный) --- #}
+{% block sidebar %}
+{{ block.super }}
+{% endblock %}

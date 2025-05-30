@@ -1,0 +1,140 @@
+/* --- START OF FILE frontend/src/components/Dashboard/Subscriptions.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --danger: #ea4335; /* Для ошибок */
+  --danger-light: #f8d7da;
+  --success: #28a745; /* Для успеха */
+  --success-light: #d4edda;
+  --border-radius: 8px;
+  --box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* --- Шапка секции --- */
+.sectionHeader {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding-bottom: 1rem;
+border-bottom: 1px solid var(--gray-light);
+margin-bottom: 1.5rem;
+flex-wrap: wrap; /* Разрешаем перенос */
+gap: 1rem; /* Отступ между элементами при переносе */
+}
+/* На мобильных выравниваем по левому краю */
+@media (max-width: 575.98px) {
+  .sectionHeader {
+      flex-direction: column; /* В столбик */
+      align-items: stretch; /* Растягиваем */
+  }
+  .title {
+      text-align: center; /* Центрируем заголовок */
+  }
+  .newButton {
+      width: 100%; /* Кнопка на всю ширину */
+      justify-content: center; /* Центрируем контент кнопки */
+  }
+}
+
+
+.title {
+font-size: 1.5rem;
+font-weight: 600;
+color: var(--dark);
+margin: 0;
+flex-grow: 1; /* Заголовок занимает доступное место */
+}
+
+/* Кнопка "Оформить новую" */
+.newButton {
+padding: 0.625rem 1.25rem;
+border-radius: var(--border-radius);
+border: none;
+font-weight: 500;
+cursor: pointer;
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+background-color: var(--primary);
+color: white;
+text-decoration: none;
+font-size: 0.9rem;
+transition: background-color 0.2s ease;
+flex-shrink: 0; /* Не сжимать */
+}
+.newButton:hover { background-color: var(--primary-dark); }
+.newButton i { font-size: 0.9em; }
+
+/* --- Список подписок --- */
+.list {
+display: flex;
+flex-direction: column;
+gap: 0; /* Отступы у карточек */
+margin-top: 1rem;
+position: relative; /* Для индикатора */
+}
+
+/* Индикатор фоновой загрузки */
+.loadingIndicator {
+  text-align: center;
+  padding: 0.5rem;
+  color: var(--gray);
+  font-size: 0.8rem;
+  position: absolute; /* Позиционируем */
+  top: -15px; /* Над списком */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.9); /* Полупрозрачный фон */
+  border-radius: 4px;
+  z-index: 1;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* --- Пагинация --- */
+.paginationContainer {
+margin-top: 2rem;
+display: flex;
+justify-content: center;
+}
+
+/* --- Сообщения --- */
+.messageContainer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--gray);
+  margin-top: 1rem;
+  background-color: var(--light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  min-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noDataMessage { font-style: italic; }
+
+.errorMessage {
+color: var(--danger);
+border: 1px solid var(--danger);
+background-color: var(--danger-light);
+padding: 1rem;
+}
+
+/* Сообщение об успехе */
+.successMessage {
+color: var(--success);
+background-color: var(--success-light);
+border: 1px solid #c3e6cb;
+padding: 1rem;
+border-radius: var(--border-radius);
+margin-bottom: 1.5rem; /* Отступ до основного контента */
+font-size: 0.9rem;
+text-align: center;
+}
+/* --- END OF FILE --- */

@@ -1,0 +1,136 @@
+/* --- START OF FILE frontend/src/components/Dashboard/DashboardSidebar.module.css --- */
+:root { /* Переменные */
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --dark: #202124;
+    --light: #ffffff;
+    --gray: #5f6368;
+    --gray-light: #e8eaed;
+    --gray-lighter: #f1f3f5;
+    --gray-lightest: #f8f9fa;
+    --danger: #ea4335;
+    --border-radius: 8px;
+    --box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  /* --- Базовые стили сайдбара --- */
+  .sidebar {
+    /* width убран, задается в обертке DashboardLayout.module.css */
+    background-color: var(--light);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    height: 100%; /* Занимает всю высоту обертки */
+    display: flex;
+    flex-direction: column; /* Контент идет сверху вниз */
+    overflow: hidden; /* Чтобы скругление работало */
+    border: 1px solid var(--gray-lighter); /* Тонкая рамка */
+  }
+  /* На мобильных убираем скругление и тень, т.к. панель выезжает */
+  @media (max-width: 991.98px) {
+      .sidebar {
+          border-radius: 0;
+          box-shadow: none;
+          border: none;
+      }
+  }
+
+  /* --- Мобильный хедер внутри сайдбара --- */
+  .mobileHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem; /* Отступы */
+      border-bottom: 1px solid var(--gray-light);
+      background-color: var(--gray-lightest); /* Немного другой фон */
+      flex-shrink: 0; /* Не сжимать хедер */
+  }
+  .mobileHeader span {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--dark);
+  }
+  .closeButton {
+      background: none;
+      border: none;
+      font-size: 1.4rem; /* Крупнее крестик */
+      color: var(--gray);
+      cursor: pointer;
+      padding: 0.25rem;
+      line-height: 1;
+  }
+  .closeButton:hover {
+      color: var(--dark);
+  }
+  /* -------------------------------------- */
+
+
+  /* --- Хедер пользователя --- */
+  .header {
+    padding: 1.5rem;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0; /* Не сжимать */
+  }
+
+  .avatar {
+   width: 55px; height: 55px; /* Уменьшил */
+   border-radius: 50%; object-fit: cover; background-color: var(--primary-light);
+   flex-shrink: 0; border: 2px solid white;
+  }
+
+  .userInfo { overflow: hidden; }
+
+  .userName {
+    font-weight: 600; font-size: 1.05rem; /* Уменьшил */
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .userEmail {
+    font-size: 0.8rem; /* Уменьшил */
+    opacity: 0.9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* --- Меню навигации --- */
+  .menu {
+      padding: 1rem 0; /* Вертикальные отступы */
+      overflow-y: auto; /* Скролл, если пунктов много */
+      flex-grow: 1; /* Занимает оставшееся место */
+  }
+
+  .menuItem {
+      display: flex; align-items: center; gap: 0.85rem;
+      padding: 0.8rem 1.5rem; /* Уменьшил padding */
+      color: var(--dark); text-decoration: none; border-left: 3px solid transparent;
+      margin-bottom: 0.1rem; /* Уменьшил отступ */
+      transition: all 0.2s ease; font-size: 0.9rem; /* Уменьшил шрифт */
+      font-weight: 500; white-space: nowrap; /* Не переносить текст */
+  }
+  .menuItem:hover { background-color: var(--gray-lightest); color: var(--primary); border-left-color: #ccc; }
+  .menuItemActive { color: var(--primary); background-color: var(--primary-light); border-left-color: var(--primary); font-weight: 600; }
+  .menuItemActive .menuIcon { color: var(--primary); }
+
+  .menuIcon {
+     width: 18px; /* Уменьшил */
+     text-align: center; font-size: 1em; /* Размер иконки относительно шрифта */
+     color: var(--gray); transition: color 0.2s ease; flex-shrink: 0;
+  }
+
+  /* --- Кнопка Выхода --- */
+  .logoutButton {
+      composes: menuItem; /* Наследуем стили пункта меню */
+      cursor: pointer;
+      color: var(--gray); /* Отличается от обычного текста меню */
+      margin-top: 0.5rem; /* Небольшой отступ сверху */
+  }
+  .logoutButton:hover {
+      color: var(--danger); /* Красный при наведении */
+      background-color: rgba(234, 67, 53, 0.05); /* Слегка красный фон */
+      border-left-color: #f5c6cb; /* Светло-красная полоска */
+  }
+  .logoutButton:hover .menuIcon { color: var(--danger); }
+  /* Убедимся, что иконка выхода тоже красная при наведении */
+  .logoutButton:hover .menuIcon { color: var(--danger); }
+/* --- END OF FILE --- */

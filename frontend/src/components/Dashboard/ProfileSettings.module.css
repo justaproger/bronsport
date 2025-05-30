@@ -1,0 +1,197 @@
+/* --- START OF FILE frontend/src/components/Dashboard/ProfileSettings.module.css --- */
+:root { /* Переменные */
+  --primary: #1a73e8;
+  --primary-dark: #0d47a1;
+  --dark: #202124;
+  --light: #ffffff;
+  --gray: #5f6368;
+  --gray-light: #e8eaed;
+  --gray-lighter: #f1f3f5;
+  --danger: #dc3545;
+  --danger-light: #f8d7da;
+  --success: #28a745;
+  --success-light: #d4edda;
+  --border-radius: 8px;
+}
+
+/* --- Секции формы --- */
+.section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-lighter); /* Тоньше разделитель */
+}
+.section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--gray-light);
+  color: var(--dark);
+}
+
+/* --- Сетка для полей --- */
+.formRow {
+  display: grid;
+  /* Используем auto-fit для автоматического переключения на 1 колонку */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem; /* Отступ между колонками/строками */
+  margin-bottom: 1.5rem; /* Отступ под строкой полей */
+}
+/* Убираем нижний отступ у последней строки перед кнопками */
+.formRow:last-of-type { margin-bottom: 0; }
+/* На самых маленьких экранах можно уменьшить gap */
+@media (max-width: 575.98px) {
+    .formRow { gap: 1rem; }
+}
+
+
+/* Отдельная группа для одного поля */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Отступ между label и input */
+}
+
+.label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--dark);
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--gray-light);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+}
+
+.readOnlyInput {
+  composes: input;
+  background-color: var(--gray-lighter);
+  color: var(--gray);
+  cursor: not-allowed;
+  border-color: var(--gray-lighter);
+}
+.readOnlyInput:focus {
+    border-color: var(--gray-lighter);
+    box-shadow: none;
+}
+
+.inputError { /* Класс для инпута с ошибкой */
+    border-color: var(--danger);
+}
+.inputError:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
+}
+
+.helperText {
+  font-size: 0.8rem; /* Сделаем чуть крупнее */
+  color: var(--gray);
+  margin-top: 2px; /* Небольшой отступ сверху */
+}
+
+/* --- Действия (кнопки) --- */
+.actions {
+  display: flex;
+  justify-content: flex-end; /* Кнопка(и) справа */
+  gap: 1rem;
+  margin-top: 2rem; /* Отступ от полей формы */
+}
+
+.button {
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--border-radius);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  min-height: 38px; /* Минимальная высота кнопки */
+  line-height: 1.4; /* Для выравнивания текста в кнопке */
+}
+.button i { font-size: 0.9em; }
+
+.buttonPrimary {
+  composes: button;
+  background-color: var(--primary);
+  color: white;
+}
+.buttonPrimary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #adb5bd;
+}
+.buttonPrimary:not(:disabled):hover {
+    background-color: var(--primary-dark);
+}
+
+/* --- Сообщения об ошибках/успехе --- */
+.message {
+    margin-bottom: 1.5rem; /* Отступ под сообщением */
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.8rem 1rem; /* Уменьшили padding */
+    border-radius: var(--border-radius);
+    border: 1px solid transparent;
+    text-align: center;
+    display: flex; /* Для иконки */
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    line-height: 1.4; /* Улучшаем читаемость */
+}
+.message i { font-size: 1.1em; }
+
+.errorMessage { /* Общая ошибка */
+  composes: message;
+  color: var(--danger);
+  background-color: var(--danger-light);
+  border-color: #f5c6cb;
+}
+.fieldError { /* Ошибка под полем */
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin-top: 0.25rem; /* Уменьшили отступ */
+    display: block;
+    line-height: 1.3;
+}
+
+.successMessage {
+  composes: message;
+  color: var(--success);
+  background-color: var(--success-light);
+  border-color: #c3e6cb;
+}
+
+/* Контейнеры для спиннеров/ошибок загрузки страницы */
+.loadingContainer, .errorContainer {
+    padding: 2rem;
+    text-align: center;
+    color: var(--gray);
+}
+.errorContainer p {
+    color: var(--danger);
+    background-color: var(--danger-light);
+    border: 1px solid #f5c6cb;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    display: inline-block; /* Чтобы не растягивалось */
+}
+/* --- END OF FILE --- */
