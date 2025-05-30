@@ -134,7 +134,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
-          {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
         </QueryClientProvider>
       </Provider>
     </React.Suspense>
